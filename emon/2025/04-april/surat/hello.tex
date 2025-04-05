@@ -1,0 +1,238 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Long Lined Cover Letter
+% LaTeX Template
+% Version 2.0 (September 17, 2021)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Authors: Fanchao Chen
+% (chenfc@fudan.edu.cn)
+%
+% Modified by: Rex Evan
+% (rex.evan96@gmail.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+%\usepackage{charter} % Use the Charter font
+
+
+\usepackage[
+	a4paper,    % Paper size
+	top=2cm,    % Top margin
+	bottom=2cm, % Bottom margin
+	left=2cm,   % Left margin
+	right=2cm,  % Right margin
+	%showframe  % Uncomment to show frames around the margins for debugging purposes
+]{geometry}
+
+\setlength{\parindent}{0pt}     % Paragraph indentation
+\setlength{\parskip}{1em}       % Vertical space between paragraphs
+
+\usepackage{graphicx}       % Required for including images
+\usepackage{multirow}		% butuh untuk merge cell di tabel
+\usepackage{fancyhdr}       % Required for customizing headers and footers
+
+\fancypagestyle{firstpage}{%
+	\fancyhf{} % Clear default headers/footers
+	\renewcommand{\headrulewidth}{0pt} % No header rule
+%	\renewcommand{\footrulewidth}{1pt} % Footer rule thickness
+}
+
+%music	\fancyhf{} % Clear default headers/footers
+%	\renewcommand{\headrulewidth}{1pt} % Header rule thickness
+%	\renewcommand{\footrulewidth}{1pt} % Footer rule thickness
+%}
+
+\AtBeginDocument{\thispagestyle{firstpage}} % Use the first page headers/footers style on the first page
+%\pagestyle{subsequentpages} % Use the subsequent pages headers/footers style on subsequent pages
+
+% hyperlink dan warna url
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+
+% untuk advanced table
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	FIRST PAGE HEADER
+%----------------------------------------------------------------------------------------
+
+%\font\nullfont=cmr10
+
+
+
+\begin{tabular}{ll}
+   \multirow{4}{*}{\includegraphics[width=0.10\textwidth]{logo/bps-logo.png}} % Logo
+   &
+   \large{\textbf{\textit{BADAN PUSAT STATISTIK}}} \\
+   & \large{\textbf{\textit{KABUPATEN SIKKA}}} \\
+   & Jl. Wairklau Nomor 29 Maumere 86112, Telp (0382) 21371 \\
+   & \textit{Homepage: sikkakab.bps.go.id, e-mail: bps5310@bps.go.id} \\
+\end{tabular}
+
+\hfill
+
+\vspace{-1em} % Pull the rule closer to the logo
+
+\rule{\linewidth}{1pt} % Horizontal rule
+
+%----------------------------------------------------------------------------------------
+%	PERIKOP SURAT
+%----------------------------------------------------------------------------------------
+
+\hfill
+Maumere, 8 April 2025
+
+\begin{tabular}{@{} lcl}
+	Nomor&:&B-<++>/53106/KP.390/2025 \\
+	Sifat&:&biasa \\
+	Lampiran&:&1 (satu) lembar\\
+    Perihal&:& Pemilihan \textit{Employee of the Month} BPS Kabupaten Sikka\\
+\end{tabular}
+
+\bigskip % Vertical whitespace
+
+%----------------------------------------------------------------------------------------
+%	ISI SURAT
+%----------------------------------------------------------------------------------------
+Dalam rangka pemberian penghargaan \textit{Employee of the Month} (EMON) bulan <++> 2025, dengan ini bapak/ibu ketua tim PMO diminta untuk melakukan penilaian kinerja anggotanya pada tautan \href{https://bpssikka.id/}{https://bpssikka.id}.
+Kiranya penilaian kinerja ini diselesaikan sebelum hari kamis, 10 april 2025 pukul 16.00 WITA.
+Daftar pegawai yang menilai dan pegawai yang dinilai dapat dinilai pada tabel berikut.
+
+\newcolumntype{C}{>{\centering\arraybackslash}m{5mm}}
+\newcolumntype{T}{>{\raggedright\arraybackslash}m{70mm}}
+\newcolumntype{L}{>{\raggedright\arraybackslash}m{80mm}}
+
+\begin{longtable}{CTL}
+
+\toprule
+	\centering Nomor &
+	\centering Pegawai yang menilai &
+	\centering Pegawai yang dinilai \tabularnewline
+\midrule
+	\centering (1) &
+	\centering (2) &
+	\centering (3) \tabularnewline
+
+\midrule
+
+\endhead
+
+	1 & Kristanto Setyo Utomo, SST, M.Si & Averinus Emanuel S.Kom \\
+	  & & Choirunnisa Jati Safitri,S.Tr.Stat \\
+	  & & Clementine Mursitadewi Riantoby A.Md.Stat. \\
+	  & & Felia Tifani Cornelia Klau A.Md.Stat. \\
+	  & & Fransiskus Saverius Soba S.Si \\
+	  & & Imelda Sandrawati Ambot, S.Si \\
+	  & & Kasianus Vinsensius Wero S.E \\
+	  & & Klara Yosefa Edralin Paoe S.E \\
+	  & & Maria Carlin Bepsi Costa, SST \\
+	  & & Maria Helionora Yulinda Sair S.E. \\
+	  & & Maria Megachita Da Silva A.Md.Stat \\
+	  & & Sekolastika Maria Filipensa Naru \\
+	  & & Wihelmus Wedo, S.Tr.Stat. \\
+	  & & Yohanes Lada Regaletha \\
+	  & & Yoseph Yakobus Dedo S.E \\
+\midrule
+	2 & Averinus Emanuel & Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat \\
+\midrule
+	3 & Felia Tifani Cornelia Klau, A.Md.Stat. & Neka Putri Fardila S.Tr.Stat. \\
+\midrule
+	4 & Fransiskus Saverius Soba, S.Si & Cornelia Christina Temu A.Md.Stat. \\
+\midrule
+	5 & Imelda Sandrawati Ambot, S.Si & Maria Diaz De Rozari\\
+	  & & Juliana Marbun, A.Md \\
+\midrule
+	6 & Wihelmus Wedo, S.Tr.Stat. & Alvino Alexandro Yappy A.Md \\
+\midrule
+	7 & Yoseph Yakobus Dedo, SE & Valentinus Nong Sina Gharu \\
+
+\bottomrule
+
+\end{longtable}
+Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.
+
+%----------------------------------------------------------------------------------------
+%	TTD
+%----------------------------------------------------------------------------------------
+\bigskip
+\hfill
+\begin{tabular}{@{}c}
+Kepala Badan Pusat Statistik\\
+Kabupaten Sikka \bigskip\\
+\\
+\\
+\\
+\\
+Kristanto Setyo Utomo, SST, M.Si
+\end{tabular}
+
+
+
+%%----------------------------------------------------------------------------------------
+%%	Lampiran
+%%----------------------------------------------------------------------------------------
+%
+%\newpage
+%
+%Lampiran 1. Daftar nama pegawai yang menilai dan pengawai yang dinilai
+%
+%\begin{center}
+%\begin{tabular}{|c|l|l|}
+%	\hline
+%	No. & Pegawai yang menilai & Pegawai yang dinilai \\
+%	\hline
+%	(1) & (2) & (3) \\
+%	\hline
+%	1 & Kristanto Setyo Utomo, SST, M.Si & Averinus Emanuel S.Kom \\
+%	  & & Choirunnisa Jati Safitri,S.Tr.Stat \\
+%	  & & Clementine Mursitadewi Riantoby A.Md.Stat. \\
+%	  & & Felia Tifani Cornelia Klau A.Md.Stat. \\
+%	  & & Fransiskus Saverius Soba S.Si \\
+%	  & & Imelda Sandrawati Ambot, S.Si \\
+%	  & & Kasianus Vinsensius Wero S.E \\
+%	  & & Klara Yosefa Edralin Paoe S.E \\
+%	  & & Maria Carlin Bepsi Costa, SST \\
+%	  & & Maria Helionora Yulinda Sair S.E. \\
+%	  & & Maria Megachita Da Silva A.Md.Stat \\
+%	  & & Sekolastika Maria Filipensa Naru \\
+%	  & & Wihelmus Wedo, S.Tr.Stat. \\
+%	  & & Yohanes Lada Regaletha \\
+%	  & & Yoseph Yakobus Dedo S.E \\
+%	\hline
+%	2 & Averinus Emanuel & Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat \\
+%	\hline
+%	3 & Felia Tifani Cornelia Klau, A.Md.Stat. & Neka Putri Fardila S.Tr.Stat. \\
+%	\hline
+%	4 & Fransiskus Saverius Soba, S.Si & Cornelia Christina Temu A.Md.Stat. \\
+%	\hline
+%	5 & Imelda Sandrawati Ambot, S.Si & Maria Diaz De Rozari\\
+%	  & & Juliana Marbun, A.Md \\
+%	\hline
+%	6 & Wihelmus Wedo, S.Tr.Stat. & Alvino Alexandro Yappy A.Md \\
+%	\hline
+%	7 & Yoseph Yakobus Dedo, SE & Valentinus Nong Sina Gharu \\
+%	\hline
+%\end{tabular}
+%\end{center}
+
+
+\end{document}
