@@ -12,7 +12,6 @@ format:
       - left=5mm
       - bottom=5mm
       - right=5mm
-    fontsize: 10pt
 ---
 
 ## Pendahuluan 
@@ -54,7 +53,9 @@ read_xlsx(data_response) |>
   #rename karena namanya panjang
   rename(
     pegawai = pegawai_yang_dinilai_masing_masing_ketua_tim_menilai_anggotanya,
-    pengetahuan = pengetahuan_tentang_tugas_dan_tanggung_jawab
+    mutu = mutu_hasil_kerja,
+    pengetahuan = pengetahuan_tentang_tugas_dan_tanggung_jawab,
+    produktivitas = produktivitas_jam_kerja
   ) 
 
 # Periksa jika terdapat double entry
@@ -172,8 +173,8 @@ tbl_aspek_kinerja <-
 tbl_response_cleaned |>
   select(
     pegawai, 
-    mutu_hasil_kerja,
-    produktivitas_jam_kerja,
+    mutu,
+    produktivitas,
     pengetahuan,
     kehandalan,
     ketepatan_waktu,
@@ -181,8 +182,8 @@ tbl_response_cleaned |>
     kerja_sama
   ) |>
   mutate(
-    mutu_hasil_kerja = mutu_hasil_kerja |> fx() |> multiply_by(0.1), # bobot 10%
-    produktivitas_jam_kerja = produktivitas_jam_kerja |> fx() |> multiply_by(0.1), # bobot 10%
+    mutu = mutu |> fx() |> multiply_by(0.1), # bobot 10%
+    produktivitas = produktivitas |> fx() |> multiply_by(0.1), # bobot 10%
     pengetahuan = pengetahuan |> fx() |> multiply_by(0.1), # bobot 10%
     kehandalan = kehandalan |> fx() |> multiply_by(0.1), # bobot 10%
     ketepatan_waktu = ketepatan_waktu |> fx() |> multiply_by(0.3), # bobot 30%
@@ -190,7 +191,7 @@ tbl_response_cleaned |>
     kerja_sama = kerja_sama  |> fx() |> multiply_by(0.2) # bobot 20%
   ) |>
   mutate(
-    aspek_kinerja = (mutu_hasil_kerja + produktivitas_jam_kerja + pengetahuan + kehandalan + ketepatan_waktu + inisiatif + kerja_sama) * 0.4 # bobot 40%
+    aspek_kinerja = (mutu + produktivitas + pengetahuan + kehandalan + ketepatan_waktu + inisiatif + kerja_sama) * 0.4 # bobot 40%
   )
 
 knitr::kable(tbl_aspek_kinerja)
