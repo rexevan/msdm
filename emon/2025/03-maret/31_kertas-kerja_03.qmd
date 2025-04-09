@@ -1,6 +1,6 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan maret Tahun 2025"
+subtitle: "Bulan Maret Tahun 2025"
 author: "Wihelmus Wedo dari Tim Pilar Manajemen SDM"
 format: 
   html: default
