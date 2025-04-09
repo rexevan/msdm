@@ -14,7 +14,7 @@ format:
       - right=5mm
 ---
 
-## Pendahuluan 
+## Pendahuluan
 
 Selamat datang di Kertas Kerja EMON bulan maret 2025.
 Bulan ini terdapat beberapa pengembangan script dari bulan lalu.
@@ -211,7 +211,7 @@ tbl_response_cleaned |>
     berorientasi_pelayanan,
     akuntabel,
     kompeten,
-    harmonis, 
+    harmonis,
     loyal,
     adaptif,
     kolaboratif
