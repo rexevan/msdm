@@ -1,9 +1,9 @@
-# README
+Startpage
+========
+### Preview
+<img src="home.gif" alt="Preview" width="100%"/>
 
+This is a fork of RamenMaestro's [startpage](https://github.com/RamenMaestro/startpage) with a image scroll option and larger option size.
 
-## Employee of the Month 
-
-
-### 03 Maret 
-
-- [Kertas Kerja](emon/2025/03-maret/31_kertas-kerja_03.html)
+## Credits
+Images used in the sidebar are by background artist [Waneella](https://twitter.com/waneella_).
