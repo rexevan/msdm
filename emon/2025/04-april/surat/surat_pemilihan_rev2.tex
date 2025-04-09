@@ -1,0 +1,224 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Long Lined Cover Letter
+% LaTeX Template
+% Version 2.0 (September 17, 2021)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Authors: Fanchao Chen
+% (chenfc@fudan.edu.cn)
+%
+% Modified by: Rex Evan
+% (rex.evan96@gmail.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+%\usepackage{charter} % Use the Charter font
+
+
+\usepackage[
+	a4paper,    % Paper size
+	top=2cm,    % Top margin
+	bottom=2cm, % Bottom margin
+	left=2cm,   % Left margin
+	right=2cm,  % Right margin
+	%showframe  % Uncomment to show frames around the margins for debugging purposes
+]{geometry}
+
+\setlength{\parindent}{0pt}     % Paragraph indentation
+\setlength{\parskip}{1em}       % Vertical space between paragraphs
+
+\usepackage{graphicx}       % Required for including images
+\usepackage{multirow}		% butuh untuk merge cell di tabel
+\usepackage{fancyhdr}       % Required for customizing headers and footers
+
+\fancypagestyle{firstpage}{%
+	\fancyhf{} % Clear default headers/footers
+	\renewcommand{\headrulewidth}{0pt} % No header rule
+%	\renewcommand{\footrulewidth}{1pt} % Footer rule thickness
+}
+
+%music	\fancyhf{} % Clear default headers/footers
+%	\renewcommand{\headrulewidth}{1pt} % Header rule thickness
+%	\renewcommand{\footrulewidth}{1pt} % Footer rule thickness
+%}
+
+\AtBeginDocument{\thispagestyle{firstpage}} % Use the first page headers/footers style on the first page
+%\pagestyle{subsequentpages} % Use the subsequent pages headers/footers style on subsequent pages
+
+% hyperlink dan warna url
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+
+% untuk advanced table
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{bookmark}
+\usepackage{multirow}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	FIRST PAGE HEADER
+%----------------------------------------------------------------------------------------
+
+%\font\nullfont=cmr10
+
+
+
+\begin{tabular}{ll}
+   \multirow{4}{*}{\includegraphics[width=0.10\textwidth]{logo/bps-logo.png}} % Logo
+   &
+   \large{\textbf{\textit{BADAN PUSAT STATISTIK}}} \\
+   & \large{\textbf{\textit{KABUPATEN SIKKA}}} \\
+   & Jl. Wairklau Nomor 29 Maumere 86112, Telp (0382) 21371 \\
+   & \textit{Homepage: sikkakab.bps.go.id, e-mail: bps5310@bps.go.id} \\
+\end{tabular}
+
+\hfill
+
+\vspace{-1em} % Pull the rule closer to the logo
+
+\rule{\linewidth}{1pt} % Horizontal rule
+
+%----------------------------------------------------------------------------------------
+%	PERIKOP SURAT
+%----------------------------------------------------------------------------------------
+
+\hfill
+Maumere, 8 April 2025
+
+\begin{tabular}{@{} lcl}
+	Nomor&:&B-014/53106/KP.390/2025 \\
+	Sifat&:&biasa \\
+	Lampiran&:&1 (satu) lembar\\
+    Perihal&:& Pemilihan \textit{Employee of the Month} BPS Kabupaten Sikka\\
+\end{tabular}
+
+\bigskip % Vertical whitespace
+
+%----------------------------------------------------------------------------------------
+%	ISI SURAT
+%----------------------------------------------------------------------------------------
+Dalam rangka pemberian penghargaan \textit{Employee of the Month} (EMON) bulan maret 2025, dengan ini bapak/ibu ketua tim PMO diminta untuk melakukan penilaian kinerja anggotanya pada tautan \href{https://bpssikka.id/}{https://bpssikka.id}.
+Kiranya penilaian kinerja ini diselesaikan sebelum hari kamis, 10 april 2025 pukul 16.00 WITA \@.
+Daftar pegawai yang menilai dan pegawai yang dinilai dapat dinilai pada lampiran 1.
+
+Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.
+
+%----------------------------------------------------------------------------------------
+%	TTD
+%----------------------------------------------------------------------------------------
+\bigskip
+\hfill
+\begin{tabular}{@{}c}
+Kepala Badan Pusat Statistik\\
+Kabupaten Sikka \bigskip\\
+\\
+\\
+\\
+\\
+Kristanto Setyo Utomo, SST, M.Si
+\end{tabular}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Lampiran
+%----------------------------------------------------------------------------------------
+\newpage
+
+Lampiran 1. Daftar Nama Tim, Ketua Tim dan Anggota Tim PMO
+
+\newcolumntype{C}{>{\raggedright\arraybackslash}m{40mm}}
+\newcolumntype{T}{>{\raggedright\arraybackslash}m{60mm}}
+\newcolumntype{L}{>{\raggedright\arraybackslash}m{70mm}}
+
+\begin{longtable}{CTL}
+
+\toprule
+	\centering Tim PMO &
+	\centering Ketua Tim &
+	\centering Anggota Tim  
+	\tabularnewline{}
+	\centering{(1)} & \centering{(2)} & \centering{(3)} 
+	\tabularnewline{}
+	{} & {} & {} \\
+\midrule
+	Penanggung Jawab & Kristanto Setyo Utomo, SST, M.Si & Averinus Emanuel S.Kom \\
+	  & & Choirunnisa Jati Safitri,S.Tr.Stat \\
+	  & & Felia Tifani Cornelia Klau A.Md.Stat. \\
+	  & & Fransiskus Saverius Soba S.Si \\
+	  & & Imelda Sandrawati Ambot, S.Si \\
+	  & & Kasianus Vinsensius Wero S.E \\
+	  & & Klara Yosefa Edralin Paoe S.E \\
+	  & & Maria Carlin Bepsi Costa, SST \\
+	  & & Maria Helionora Yulinda Sair S.E. \\
+	  & & Maria Megachita Da Silva A.Md.Stat \\
+	  & & Sekolastika Maria Filipensa Naru \\
+	  & & Wihelmus Wedo, S.Tr.Stat. \\
+	  & & Yoseph Yakobus Dedo S.E \\
+\midrule
+	Tim Statistik Sosial & Fransiskus Saverius Soba, S.Si & Cornelia Christina Temu A.Md.Stat. \\
+\midrule
+	Tim Statistik Tanaman Pangan dan Industri & Maria Helionora Yulinda Sair S.E. & Maria Megachita Da Silva A.Md.Stat \\
+\midrule
+	Tim Statistik Produksi & Averinus Emanuel & Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat \\
+\midrule
+	Tim Harga Konsumen & Felia Tifani Cornelia Klau, A.Md.Stat. & Neka Putri Fardila S.Tr.Stat. \\
+	{} & {} & Valentinus Nong Sina Gharu \\
+\midrule
+	Tim Statistik Jasa & Kasianus Vinsensius Wero S.E & Yohanes Lada Regaletha  \\
+\midrule
+	Tim Statistik Keuangan dan Desa Cantik & Klara Yosefa Edralin Paoe S.E & Neka Putri Fardila S.Tr.Stat.  \\
+\midrule
+	Tim Statistik Usaha & Yoseph Yakobus Dedo S.E & Cornelia Christina Temu A.Md.Stat.  \\
+	{} & {} & Valentinus Nong Sina Gharu  \\
+\midrule
+	Tim Neraca Wilayah dan Analisis Statistik & Maria Carlin Bepsi Costa, SST & Clementine Mursitadewi Riantoby A.Md.Stat.  \\
+	  & & Yohanes Lada Regaletha \\
+\midrule
+	Tim Statistik Sektoral & Maria Carlin Bepsi Costa SST &  Neka Putri Fardila S.Tr.Stat.\\
+\midrule
+	\multirow{2}{4cm}{Tim Pengolahan dan Pengembahan TI} & 
+	Wihelmus Wedo, S.Tr.Stat. &  
+	Alvino Alexandro Yappy A.Md \\
+	{} & {} & Choirunnisa Jati Safitri, S.Tr.Stat \\
+\midrule
+	Tim Humas dan Diseminasi Statistik & Choirunnisa Jati Safitri, S.Tr.Stat & Maryo Yoseph Ambarto Dwi Sili Osan, A.Md.Stat\\
+	{} & {} & Clementine Mursitadewi Riantoby A.Md.Stat. \\
+	{} & {} & Alvino Alexandro Yappy A.Md \\
+	{} & {} & Valentinus Nong Sina Gharu \\
+\midrule
+	Tim Sub Bagian Umum & Imelda Sandrawati Ambot, S.Si & Sekolastika Maria Filipensa Naru SE \\
+	{} & {} & Juliana Marbun, A.Md \\
+	{} & {} & Maria Diaz De Rozari\\
+\midrule
+	\multirow{3}{3cm}{Tim Manajemen Anggaran} & Sekolastika Maria Filipensa Naru SE & Imelda Sandrawati Ambot, S.Si \\ 
+	{} & {} & Juliana Marbun, A.Md \\
+	{} & {} & Maria Carlin Bepsi Costa, SST \\
+\midrule
+	Tim Sekretariat RB & Maria Megachita Da Silva A.Md.Stat & Felia Tifani Cornelia Klau A.Md.Stat. \\
+	{} & {} & Maria Carlin Bepsi Costa SST\\
+	{} & {} & Cornelia Christina Temu A.Md.Stat. \\
+
+\bottomrule{}
+
+\end{longtable}
+
+\end{document}
