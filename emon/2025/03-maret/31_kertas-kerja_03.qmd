@@ -2,7 +2,17 @@
 title: "Kertas Kerja EMON"
 subtitle: "Bulan maret Tahun 2025"
 author: "Wihelmus Wedo dari Tim Pilar Manajemen SDM"
-format: html
+format: 
+  html: default
+  pdf:
+    documentclass: report
+    classoption: [landscape]
+    geometry: 
+      - top=5mm
+      - left=5mm
+      - bottom=5mm
+      - right=5mm
+    fontsize: 10pt
 ---
 
 ## Pendahuluan 
