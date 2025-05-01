@@ -1,0 +1,71 @@
+
+## Pendahuluan
+
+```{r setting, message=FALSE, warning=FALSE}
+
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+
+library(tidyverse)
+library(readxl)
+library(here)
+library(magrittr)
+
+bulan <- "april"
+tahun <- "2025"
+```
+
+## Input Data
+
+```{r input-data}
+
+data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-691).xlsx")
+tbl_pegawai <- read_xlsx(here("data/emon_db_pegawai.xlsx"))  |> select(nama_response, n_pmo)
+
+tbl_response_raw <-
+read_xlsx(data_response) |> 
+  janitor::clean_names() |>
+  # tanggal surat pemilihan emon april diterbit
+  filter(waktu_mulai >= "2025-04-28") |> 
+  #rename karena namanya panjang
+  rename(
+    pegawai = pegawai_yang_dinilai_masing_masing_ketua_tim_menilai_anggotanya,
+    mutu = mutu_hasil_kerja,
+    pengetahuan = pengetahuan_tentang_tugas_dan_tanggung_jawab,
+    produktivitas = produktivitas_jam_kerja
+  ) 
+
+# Periksa jika terdapat double entry
+tbl_response_raw |> 
+  count(pegawai) |>
+  arrange(desc(n)) |>
+  knitr::kable()
+
+tbl_monitoring <- 
+tbl_response_raw |> 
+  count(pegawai, name = "sudah") |>
+  arrange(desc(sudah)) |>
+  left_join(tbl_pegawai, by = join_by(pegawai == nama_response)) |>
+  mutate(belum = n_pmo - sudah) |>
+  select(pegawai, jml_tim = n_pmo, sudah, belum)
+  
+  tbl_monitoring |>
+  arrange(belum, pegawai) |>  
+  select(pegawai, belum) |>
+  knitr::kable()
+
+
+  tbl_monitoring |>
+  arrange(belum, pegawai) |>  
+  select(pegawai, belum)  |>
+  print(n = Inf)
+```
+
+
+```{r aux}
+
+tbl_pegawai <- read_xlsx(here("data/emon_db_pegawai.xlsx"))  |> select(nama_response, n_pmo)
+
+tbl_pegawai
+```}
