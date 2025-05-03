@@ -38,8 +38,8 @@ tahun <- "2025"
 
 ```{r input-data}
 
-data_presensi <- here("data/Rekap Presensi Satker 1744167175654.xlsx")
-data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-686).xlsx")
+data_presensi <- here("data/Rekap Presensi Satker 1746141517697.xlsx")
+data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-707).xlsx")
 
 tbl_presensi_all <- 
 read_xlsx(data_presensi, skip = 6) |>
@@ -67,7 +67,49 @@ tbl_response_raw |>
 
 ```
 
-Bulan ini sepertinya tidak ada penilaian ganda, sehingga kita bisa lanjut
+## Tabel pembantu 
+
+Tabel ini dipakai sebab variabel nama pegawai dari file presensi dan file response tidaklah sama. 
+file presensi menggunakan nama yang tidak menganduk gelar, sedangkan file response menggunakan nama yang memiliki gelar
+
+```{r auxilary}
+emon_db_pegawai <- here("data/emon_db_pegawai.xlsx") |> read_xlsx()
+```
+
+
+## cleaning
+
+terdapat beebrapa nama pegawai yang nilai jumlah penilaiannya lebih banyak dati jumlah tim pmo, dapat dipaskan bahwa terdapat penilaian ganda/double sehingga kita perlu menghapusnya. Penilaian yang **lebih** ini, bisa dilihat dari kolom `belum`.
+
+```{r cleaning}
+
+tbl_pegawai <- emon_db_pegawai |> select(nama_response, n_pmo)
+
+# Periksa jika terdapat double entry
+tbl_monitoring <- 
+tbl_response_raw |> 
+  count(pegawai, name = "sudah") |>
+  arrange(desc(sudah)) |>
+  left_join(tbl_pegawai, by = join_by(pegawai == nama_response)) |>
+  mutate(belum = n_pmo - sudah) |>
+  select(pegawai, jml_tim = n_pmo, sudah, belum)
+  
+tbl_monitoring |>
+  arrange(belum, pegawai) |>  
+  knitr::kable()
+
+```
+
+```{r}
+tbl_response_raw |>
+  filter(
+    pegawai == "Imelda Sandrawati Ambot S.Si" | 
+    pegawai == "Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat"
+  ) |>
+    knitr::kable()
+```
+
+semua penilaian tidak memiliki **missing values** kecuali di kolom catatan (yang memang opsional untuk diisi), oleh karena itu, saya akan menghapus baris/penilaian yang lama, yaitu baris nomor 670 dan 689.
 
 ## Pegawai yang tidak masuk dalam pernilaian EMON
 
@@ -87,17 +129,9 @@ tbl_presensi <-
 tbl_presensi_all |>
   filter(nip != "340057264" & nip != "340019275")
 
-tbl_response_cleaned <- tbl_response_raw
+tbl_response_cleaned <- tbl_response_raw |> filter(!is_in(670, 689))
 ```
 
-## Tabel pembantu 
-
-Tabel ini dipakai sebab variabel nama pegawai dari file presensi dan file response tidaklah sama. 
-file presensi menggunakan nama yang tidak menganduk gelar, sedangkan file response menggunakan nama yang memiliki gelar
-
-```{r auxilary}
-emon_db_pegawai <- here("data/emon_db_pegawai.xlsx") |> read_xlsx()
-```
 
 
 ## Hitung poin Presensi
@@ -159,6 +193,8 @@ knitr::kable(tbl_aspek_administrasi)
 
 ### Aspek Kinerja
 
+Mulai dari pemilihan emon bulan april, setiap pegawai dinilai menggunakan tim PMO, sehingga 1 pegawai bisa saja dinilai lebih dari 1 kali.
+
 ```{r aspek-kinerja}
 
 fx  <- function(x) {
@@ -171,6 +207,8 @@ fx  <- function(x) {
   )
   return(y)
 }
+
+
 tbl_aspek_kinerja <- 
 tbl_response_cleaned |>
   select(
@@ -194,7 +232,12 @@ tbl_response_cleaned |>
   ) |>
   mutate(
     aspek_kinerja = (mutu + produktivitas + pengetahuan + kehandalan + ketepatan_waktu + inisiatif + kerja_sama) * 0.4 # bobot 40%
+  ) |>
+  summarise(
+    .by = pegawai,
+    across(.fns = ~ mean(.x, na.rm = TRUE)) 
   )
+
 
 knitr::kable(tbl_aspek_kinerja)
 ```
@@ -229,6 +272,10 @@ tbl_response_cleaned |>
   ) |>
   mutate(
     aspek_berakhlak = (berorientasi_pelayanan + akuntabel + kompeten + harmonis + loyal + adaptif + kolaboratif) * 0.4 # bobot aspek 40%
+  ) |>
+  summarise(
+    .by = pegawai,
+    across(.fns = ~ mean(.x, na.rm = TRUE)) 
   )
 
 knitr::kable(tbl_aspek_berakhlak)
@@ -263,20 +310,8 @@ Interpretasi nilai emon adalah sebagai berikut :
 2. Nilai 1 - 2.99 : secara rata-rata ada diantara Baik dan sangat baik
 3. Nilai 3 : nilai sempurna a.k.a sangat baik
 
-Terdapat beberapa nama yang memiliki nilai emon tertinggi.
-Oleh karena itu, perlu dilakukan *tie-breaker*.
-
-## Tie-Breaker 
-
 ```{r keputusan}
-emon_winner <- "Imelda Sandrawati Ambot"
+emon_winner <- "Juliana Marbun"
 ```
 
-Setelah memberitahu kepada Kepala BPS Kabupaten Sikka, diputuskan bahwa *Employee of the Month* untuk bulan `r bulan` tahun `r tahun` adalah `r emon_winner`. Beliau di pilih karena
-
-1. Mewakili BPS Kabupaten Sikka mendapatkan penghargaan dari KPPN Ende
-2. Mewakili BPS Kabupaten Sikka dalam rapat Satu Data Sikka di Bapperida.
-
-
-
-
+*Employee of the Month* untuk bulan `r bulan` tahun `r tahun` adalah `r emon_winner`.

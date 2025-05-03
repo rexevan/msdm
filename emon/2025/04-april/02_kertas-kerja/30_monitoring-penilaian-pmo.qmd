@@ -20,7 +20,7 @@ tahun <- "2025"
 
 ```{r input-data}
 
-data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-691).xlsx")
+data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-705).xlsx")
 tbl_pegawai <- read_xlsx(here("data/emon_db_pegawai.xlsx"))  |> select(nama_response, n_pmo)
 
 tbl_response_raw <-
@@ -52,20 +52,6 @@ tbl_response_raw |>
   
   tbl_monitoring |>
   arrange(belum, pegawai) |>  
-  select(pegawai, belum) |>
   knitr::kable()
-
-
-  tbl_monitoring |>
-  arrange(belum, pegawai) |>  
-  select(pegawai, belum)  |>
-  print(n = Inf)
 ```
 
-
-```{r aux}
-
-tbl_pegawai <- read_xlsx(here("data/emon_db_pegawai.xlsx"))  |> select(nama_response, n_pmo)
-
-tbl_pegawai
-```}
