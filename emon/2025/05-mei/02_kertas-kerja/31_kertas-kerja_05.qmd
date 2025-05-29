@@ -1,7 +1,7 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan April Tahun 2025"
-author: "Wihelmus Wedo dari April Pilar Manajemen SDM"
+subtitle: "Bulan Mei Tahun 2025"
+author: "Wihelmus Wedo dari Pilar Manajemen SDM"
 format: 
   html: default
   pdf:
@@ -12,11 +12,14 @@ format:
       - left=5mm
       - bottom=5mm
       - right=5mm
+params:
+  bulan: "mei"
+  tahun: "2025"
 ---
 
 ## Pendahuluan
 
-Selamat datang di Kertas Kerja EMON bulan maret 2025.
+Selamat datang di Kertas Kerja EMON bulan `r params$bulan` tahun `r params$tahun``.
 Bulan ini terdapat beberapa pengembangan script dari bulan lalu.
 
 ```{r setting, message=FALSE, warning=FALSE}
@@ -29,9 +32,6 @@ library(tidyverse)
 library(readxl)
 library(here)
 library(magrittr)
-
-bulan <- "maret"
-tahun <- "2025"
 ```
 
 ## Input Data
@@ -164,8 +164,6 @@ tbl_aspek_administrasi |>
 
 ### Aspek Kinerja
 
-Mulai dari pemilihan emon bulan april, setiap pegawai dinilai menggunakan tim PMO, sehingga 1 pegawai bisa saja dinilai lebih dari 1 kali.
-
 ```{r aspek-kinerja}
 
 fx  <- function(x) {
@@ -176,6 +174,11 @@ fx  <- function(x) {
     x == "Kurang Baik" ~ 0,
     .default = NA
   )
+  return(y)
+}
+
+hitung <- function(x, bobot) {
+  y <- fx(x) * bobot
   return(y)
 }
 
@@ -192,13 +195,13 @@ tbl_response_cleaned |>
     kerja_sama
   ) |>
   mutate(
-    mutu = mutu |> fx() |> multiply_by(0.1), # bobot 10%
-    produktivitas = produktivitas |> fx() |> multiply_by(0.1), # bobot 10%
-    pengetahuan = pengetahuan |> fx() |> multiply_by(0.1), # bobot 10%
-    kehandalan = kehandalan |> fx() |> multiply_by(0.1), # bobot 10%
-    waktu = waktu |> fx() |> multiply_by(0.3), # bobot 30%
-    inisiatif = inisiatif |> fx() |> multiply_by(0.1), # bobot 10%
-    kerja_sama = kerja_sama  |> fx() |> multiply_by(0.2) # bobot 20%
+    mutu = mutu |> hitung(10/100), # bobot 10%
+    produktivitas = produktivitas |> hitung(10/100), # bobot 10%
+    pengetahuan = pengetahuan |> hitung(10/100), # bobot 10%
+    kehandalan = kehandalan |> hitung(10/100), # bobot 10%
+    waktu = waktu |> hitung(30/100), # bobot 30%
+    inisiatif = inisiatif |> hitung(10/100), # bobot 10%
+    kerja_sama = kerja_sama  |> hitung(20/100) # bobot 20%
   ) |>
   summarise(
     .by = pegawai,
@@ -225,29 +228,29 @@ tbl_aspek_berakhlak <-
 tbl_response_cleaned |>
   select(
     pegawai,
-    berorientasi_pelayanan,
-    akuntabel,
-    kompeten,
-    harmonis,
-    loyal,
-    adaptif,
-    kolaboratif
+    Ber = berorientasi_pelayanan,
+    A1 = akuntabel,
+    K1 = kompeten,
+    H = harmonis,
+    L = loyal,
+    A2 = adaptif,
+    K2 = kolaboratif
   ) |>
   mutate(
-    berorientasi_pelayanan = berorientasi_pelayanan |> fx() |> multiply_by(0.1), # bobot 10% 
-    akuntabel = akuntabel |> fx() |> multiply_by(0.1), # bobot 10% 
-    kompeten = kompeten |> fx() |> multiply_by(0.1), # bobot 10% 
-    harmonis = harmonis |> fx() |> multiply_by(0.1), # bobot 10% 
-    loyal = loyal |> fx() |> multiply_by(0.1), # bobot 10% 
-    adaptif = adaptif |> fx() |> multiply_by(0.3), # bobot 30% 
-    kolaboratif = kolaboratif  |> fx() |> multiply_by(0.2) # bobot 20% 
+    Ber = Ber |> hitung(10/100), # bobot 10% 
+    A1 = A1 |> hitung(10/100), # bobot 10% 
+    K1 = K1 |> hitung(10/100), # bobot 10% 
+    H = H |> hitung(10/100), # bobot 10% 
+    L = L |> hitung(10/100), # bobot 10% 
+    A2 = A2 |> hitung(30/100), # bobot 30% 
+    K2 = K2  |> hitung(20/100) # bobot 20% 
   ) |>
   summarise(
     .by = pegawai,
     across(.fns = ~ mean(.x, na.rm = TRUE)) 
   ) |>
   mutate(
-    aspek_berakhlak = (berorientasi_pelayanan + akuntabel + kompeten + harmonis + loyal + adaptif + kolaboratif) * 0.4 # bobot aspek 40%
+    aspek_berakhlak = (Ber + A1 + K1 + H + L + A2 + K2) * 0.4 # bobot aspek 40%
   )
 
 tbl_aspek_berakhlak |>
@@ -296,4 +299,4 @@ tbl_emon |>
 
 ```
 
-*Employee of the Month* untuk bulan `r bulan` tahun `r tahun` adalah `r emon_winner`.
+*Employee of the Month* untuk bulan `r params$bulan` tahun `r params$tahun` adalah `r emon_winner`.

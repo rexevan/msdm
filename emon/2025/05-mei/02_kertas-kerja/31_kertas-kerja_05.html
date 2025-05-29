@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Wihelmus Wedo dari April Pilar Manajemen SDM">
+<meta name="author" content="Wihelmus Wedo dari Pilar Manajemen SDM">
 
 <title>Kertas Kerja EMON</title>
 <style>
@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Kertas Kerja EMON</h1>
-<p class="subtitle lead">Bulan April Tahun 2025</p>
+<p class="subtitle lead">Bulan Mei Tahun 2025</p>
 </div>
 
 
@@ -94,7 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Wihelmus Wedo dari April Pilar Manajemen SDM </p>
+             <p>Wihelmus Wedo dari Pilar Manajemen SDM </p>
           </div>
   </div>
     
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="pendahuluan" class="level2">
 <h2 class="anchored" data-anchor-id="pendahuluan">Pendahuluan</h2>
-<p>Selamat datang di Kertas Kerja EMON bulan maret 2025. Bulan ini terdapat beberapa pengembangan script dari bulan lalu.</p>
+<p>Selamat datang di Kertas Kerja EMON bulan mei tahun 2025`. Bulan ini terdapat beberapa pengembangan script dari bulan lalu.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span></span>
@@ -118,10 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>bulan <span class="ot">&lt;-</span> <span class="st">"maret"</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>tahun <span class="ot">&lt;-</span> <span class="st">"2025"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="input-data" class="level2">
@@ -227,9 +224,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspek_administrasi =</span> (kehadiran <span class="sc">*</span> <span class="fl">0.4</span> <span class="sc">+</span> kedisiplinan <span class="sc">*</span> <span class="fl">0.6</span>) <span class="sc">*</span> <span class="fl">0.2</span> <span class="co"># bobot aspek 20%</span></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tbl_aspek_administrasi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>tbl_aspek_administrasi <span class="sc">|&gt;</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(aspek_administrasi)) <span class="sc">|&gt;</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Tabel Aspek Administrasi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
+<caption>Tabel Aspek Administrasi</caption>
 <colgroup>
 <col style="width: 9%">
 <col style="width: 32%">
@@ -289,17 +289,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.60</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">340019825</td>
-<td style="text-align: left;">Sekolastika Maria Filipensa Naru</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">94.11765</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0.36</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">340053753</td>
 <td style="text-align: left;">Fransiskus Saverius Soba</td>
 <td style="text-align: right;">17</td>
@@ -310,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340053757</td>
 <td style="text-align: left;">Kasianus Vinsensius Wero</td>
 <td style="text-align: right;">17</td>
@@ -321,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340053759</td>
 <td style="text-align: left;">Klara Yosefa Edralin Paoe</td>
 <td style="text-align: right;">17</td>
@@ -332,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340053779</td>
 <td style="text-align: left;">Yoseph Yakobus Dedo</td>
 <td style="text-align: right;">17</td>
@@ -343,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340055195</td>
 <td style="text-align: left;">Averinus Emanuel</td>
 <td style="text-align: right;">17</td>
@@ -354,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340055215</td>
 <td style="text-align: left;">Imelda Sandrawati Ambot</td>
 <td style="text-align: right;">17</td>
@@ -365,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340055228</td>
 <td style="text-align: left;">Maria Helionora Yulinda Sair</td>
 <td style="text-align: right;">17</td>
@@ -376,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340057474</td>
 <td style="text-align: left;">Maria Carlin Bepsi Costa</td>
 <td style="text-align: right;">17</td>
@@ -387,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340059028</td>
 <td style="text-align: left;">Wihelmus Wedo</td>
 <td style="text-align: right;">17</td>
@@ -398,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340059848</td>
 <td style="text-align: left;">Clementine Mursitadewi Riantoby</td>
 <td style="text-align: right;">17</td>
@@ -409,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340059849</td>
 <td style="text-align: left;">Cornelia Christina Temu</td>
 <td style="text-align: right;">17</td>
@@ -420,7 +409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340059855</td>
 <td style="text-align: left;">Felia Tifani Cornelia Klau</td>
 <td style="text-align: right;">17</td>
@@ -431,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340060406</td>
 <td style="text-align: left;">Maria Megachita Da Silva</td>
 <td style="text-align: right;">17</td>
@@ -442,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340060409</td>
 <td style="text-align: left;">Maryo Yoseph Ambarto Dwi Sili Osan</td>
 <td style="text-align: right;">17</td>
@@ -453,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340061169</td>
 <td style="text-align: left;">Alvino Alexandro Yappy</td>
 <td style="text-align: right;">17</td>
@@ -464,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340061365</td>
 <td style="text-align: left;">Juliana Marbun</td>
 <td style="text-align: right;">17</td>
@@ -475,7 +464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">340062383</td>
 <td style="text-align: left;">Choirunnisa Jati Safitri</td>
 <td style="text-align: right;">17</td>
@@ -486,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">340063388</td>
 <td style="text-align: left;">Neka Putri Fardila</td>
 <td style="text-align: right;">17</td>
@@ -497,6 +486,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0.60</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">340019825</td>
+<td style="text-align: left;">Sekolastika Maria Filipensa Naru</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">94.11765</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.36</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -504,7 +504,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="aspek-kinerja" class="level3">
 <h3 class="anchored" data-anchor-id="aspek-kinerja">Aspek Kinerja</h3>
-<p>Mulai dari pemilihan emon bulan april, setiap pegawai dinilai menggunakan tim PMO, sehingga 1 pegawai bisa saja dinilai lebih dari 1 kali.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fx  <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> </span>
@@ -517,50 +516,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>tbl_aspek_kinerja <span class="ot">&lt;-</span> </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>tbl_response_cleaned <span class="sc">|&gt;</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    pegawai, </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    mutu,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    produktivitas,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    pengetahuan,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    kehandalan,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    ketepatan_waktu,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    inisiatif,</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    kerja_sama</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">mutu =</span> mutu <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10%</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">produktivitas =</span> produktivitas <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10%</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">pengetahuan =</span> pengetahuan <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10%</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">kehandalan =</span> kehandalan <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10%</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">ketepatan_waktu =</span> ketepatan_waktu <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.3</span>), <span class="co"># bobot 30%</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">inisiatif =</span> inisiatif <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10%</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">kerja_sama =</span> kerja_sama  <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.2</span>) <span class="co"># bobot 20%</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspek_kinerja =</span> (mutu <span class="sc">+</span> produktivitas <span class="sc">+</span> pengetahuan <span class="sc">+</span> kehandalan <span class="sc">+</span> ketepatan_waktu <span class="sc">+</span> inisiatif <span class="sc">+</span> kerja_sama) <span class="sc">*</span> <span class="fl">0.4</span> <span class="co"># bobot 40%</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> pegawai,</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tbl_aspek_kinerja)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>hitung <span class="ot">&lt;-</span> <span class="cf">function</span>(x, bobot) {</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">fx</span>(x) <span class="sc">*</span> bobot</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>tbl_aspek_kinerja <span class="ot">&lt;-</span> </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>tbl_response_cleaned <span class="sc">|&gt;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    pegawai, </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    mutu,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    produktivitas,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    pengetahuan,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    kehandalan,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">waktu =</span> ketepatan_waktu,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    inisiatif,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    kerja_sama</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">mutu =</span> mutu <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10%</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">produktivitas =</span> produktivitas <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10%</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">pengetahuan =</span> pengetahuan <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10%</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">kehandalan =</span> kehandalan <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10%</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">waktu =</span> waktu <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">30</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 30%</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">inisiatif =</span> inisiatif <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10%</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">kerja_sama =</span> kerja_sama  <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">20</span><span class="sc">/</span><span class="dv">100</span>) <span class="co"># bobot 20%</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> pegawai,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="at">.cols =</span> mutu<span class="sc">:</span>kerja_sama, <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspek_kinerja =</span> (mutu <span class="sc">+</span> produktivitas <span class="sc">+</span> pengetahuan <span class="sc">+</span> kehandalan <span class="sc">+</span> waktu <span class="sc">+</span> inisiatif <span class="sc">+</span> kerja_sama) <span class="sc">*</span> <span class="fl">0.4</span> <span class="co"># bobot 40%</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>tbl_aspek_kinerja <span class="sc">|&gt;</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(aspek_kinerja)) <span class="sc">|&gt;</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Tabel Aspek Kinerja"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
+<caption>Tabel Aspek Kinerja</caption>
 <colgroup>
-<col style="width: 31%">
-<col style="width: 6%">
+<col style="width: 33%">
+<col style="width: 7%">
+<col style="width: 10%">
 <col style="width: 9%">
 <col style="width: 8%">
+<col style="width: 4%">
 <col style="width: 7%">
-<col style="width: 11%">
-<col style="width: 6%">
-<col style="width: 7%">
-<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 10%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -569,13 +575,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: right;">produktivitas</th>
 <th style="text-align: right;">pengetahuan</th>
 <th style="text-align: right;">kehandalan</th>
-<th style="text-align: right;">ketepatan_waktu</th>
+<th style="text-align: right;">waktu</th>
 <th style="text-align: right;">inisiatif</th>
 <th style="text-align: right;">kerja_sama</th>
 <th style="text-align: right;">aspek_kinerja</th>
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td style="text-align: left;">Juliana Marbun A. Md</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.6000000</td>
+<td style="text-align: right;">1.2000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Neka Putri Fardila,S.Tr.Stat.</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.6000000</td>
+<td style="text-align: right;">1.0133333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.6000000</td>
+<td style="text-align: right;">0.9600000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cornelia Christina Temu A.Md.Stat.</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.4666667</td>
+<td style="text-align: right;">0.9066667</td>
+</tr>
 <tr class="odd">
 <td style="text-align: left;">Clementine Mursitadewi Riantoby A.Md.Stat.</td>
 <td style="text-align: right;">0.3000000</td>
@@ -599,83 +649,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.8800000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Neka Putri Fardila,S.Tr.Stat.</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.7</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">1.0133333</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Maria Megachita Da Silva A.Md.Stat</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.8400000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Valentinus Nong Sina Gharu</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4533333</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Cornelia Christina Temu A.Md.Stat.</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.7</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.4666667</td>
-<td style="text-align: right;">0.9066667</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">0.9600000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Alvino Alexandro Yappy A.Md</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.5600000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Choirunnisa Jati Safitri,S.Tr.Stat</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.7200000</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Maria Carlin Bepsi Costa SST</td>
 <td style="text-align: right;">0.3000000</td>
 <td style="text-align: right;">0.2000000</td>
@@ -685,39 +658,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.4000000</td>
 <td style="text-align: right;">0.8800000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Maria Diaz De Rozari</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">0.8000000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Juliana Marbun A. Md</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.9</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">1.2000000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Sekolastika Maria Filipensa Naru SE</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.6400000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Felia Tifani Cornelia Klau A.Md.Stat.</td>
@@ -731,28 +671,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.8800000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Averinus Emanuel S.Kom</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
+<td style="text-align: left;">Maria Megachita Da Silva A.Md.Stat</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.6</td>
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.8400000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Fransiskus Saverius Soba S.Si</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Imelda Sandrawati Ambot S.Si</td>
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.2000000</td>
@@ -762,6 +691,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.4000000</td>
 <td style="text-align: right;">0.8400000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maria Diaz De Rozari</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.6000000</td>
+<td style="text-align: right;">0.8000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Kasianus Vinsensius Wero S.E</td>
@@ -775,7 +715,95 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.7200000</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Choirunnisa Jati Safitri,S.Tr.Stat</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.7200000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sekolastika Maria Filipensa Naru SE</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.6400000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alvino Alexandro Yappy A.Md</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.5600000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wihelmus Wedo S.Tr.Stat</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4800000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Valentinus Nong Sina Gharu</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4533333</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Averinus Emanuel S.Kom</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fransiskus Saverius Soba S.Si</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Klara Yosefa Edralin Paoe S.E</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Yoseph Yakobus Dedo S.E</td>
 <td style="text-align: right;">0.1000000</td>
 <td style="text-align: right;">0.1000000</td>
 <td style="text-align: right;">0.1000000</td>
@@ -796,28 +824,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.2800000</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Wihelmus Wedo S.Tr.Stat</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4800000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Yoseph Yakobus Dedo S.E</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -831,55 +837,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tbl_response_cleaned <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    pegawai,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    berorientasi_pelayanan,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    akuntabel,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    kompeten,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    harmonis,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    loyal,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    adaptif,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    kolaboratif</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Ber =</span> berorientasi_pelayanan,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">A1 =</span> akuntabel,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">K1 =</span> kompeten,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">H =</span> harmonis,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">L =</span> loyal,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">A2 =</span> adaptif,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">K2 =</span> kolaboratif</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">berorientasi_pelayanan =</span> berorientasi_pelayanan <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10% </span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">akuntabel =</span> akuntabel <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10% </span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">kompeten =</span> kompeten <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10% </span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">harmonis =</span> harmonis <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10% </span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">loyal =</span> loyal <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.1</span>), <span class="co"># bobot 10% </span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">adaptif =</span> adaptif <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.3</span>), <span class="co"># bobot 30% </span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">kolaboratif =</span> kolaboratif  <span class="sc">|&gt;</span> <span class="fu">fx</span>() <span class="sc">|&gt;</span> <span class="fu">multiply_by</span>(<span class="fl">0.2</span>) <span class="co"># bobot 20% </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Ber =</span> Ber <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10% </span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">A1 =</span> A1 <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10% </span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">K1 =</span> K1 <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10% </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">H =</span> H <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10% </span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">L =</span> L <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">10</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 10% </span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">A2 =</span> A2 <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">30</span><span class="sc">/</span><span class="dv">100</span>), <span class="co"># bobot 30% </span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">K2 =</span> K2  <span class="sc">|&gt;</span> <span class="fu">hitung</span>(<span class="dv">20</span><span class="sc">/</span><span class="dv">100</span>) <span class="co"># bobot 20% </span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspek_berakhlak =</span> (berorientasi_pelayanan <span class="sc">+</span> akuntabel <span class="sc">+</span> kompeten <span class="sc">+</span> harmonis <span class="sc">+</span> loyal <span class="sc">+</span> adaptif <span class="sc">+</span> kolaboratif) <span class="sc">*</span> <span class="fl">0.4</span> <span class="co"># bobot aspek 40%</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> pegawai,</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> pegawai,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspek_berakhlak =</span> (Ber <span class="sc">+</span> A1 <span class="sc">+</span> K1 <span class="sc">+</span> H <span class="sc">+</span> L <span class="sc">+</span> A2 <span class="sc">+</span> K2) <span class="sc">*</span> <span class="fl">0.4</span> <span class="co"># bobot aspek 40%</span></span>
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tbl_aspek_berakhlak)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>tbl_aspek_berakhlak <span class="sc">|&gt;</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(aspek_berakhlak)) <span class="sc">|&gt;</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Tabel Aspek BerAKHLAK"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
+<caption>Tabel Aspek BerAKHLAK</caption>
 <colgroup>
-<col style="width: 31%">
-<col style="width: 15%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 5%">
+<col style="width: 36%">
 <col style="width: 8%">
-<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 3%">
+<col style="width: 8%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">pegawai</th>
-<th style="text-align: right;">berorientasi_pelayanan</th>
-<th style="text-align: right;">akuntabel</th>
-<th style="text-align: right;">kompeten</th>
-<th style="text-align: right;">harmonis</th>
-<th style="text-align: right;">loyal</th>
-<th style="text-align: right;">adaptif</th>
-<th style="text-align: right;">kolaboratif</th>
+<th style="text-align: right;">Ber</th>
+<th style="text-align: right;">A1</th>
+<th style="text-align: right;">K1</th>
+<th style="text-align: right;">H</th>
+<th style="text-align: right;">L</th>
+<th style="text-align: right;">A2</th>
+<th style="text-align: right;">K2</th>
 <th style="text-align: right;">aspek_berakhlak</th>
 </tr>
 </thead>
@@ -896,72 +905,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1.2000000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Yohanes Lada Regaletha</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
+<td style="text-align: left;">Juliana Marbun A. Md</td>
+<td style="text-align: right;">0.3000000</td>
 <td style="text-align: right;">0.3000000</td>
 <td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.8400000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Neka Putri Fardila,S.Tr.Stat.</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.7</td>
-<td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">0.9866667</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Maria Megachita Da Silva A.Md.Stat</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.7600000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Valentinus Nong Sina Gharu</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.1666667</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">0.3333333</td>
-<td style="text-align: right;">0.6666667</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Cornelia Christina Temu A.Md.Stat.</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.2333333</td>
-<td style="text-align: right;">0.5</td>
-<td style="text-align: right;">0.4666667</td>
-<td style="text-align: right;">0.8533333</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.3000000</td>
+<td style="text-align: right;">0.9</td>
 <td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">0.9200000</td>
+<td style="text-align: right;">1.1600000</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Alvino Alexandro Yappy A.Md</td>
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.3000000</td>
@@ -972,27 +926,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.6000000</td>
 <td style="text-align: right;">1.0000000</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Choirunnisa Jati Safitri,S.Tr.Stat</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.7600000</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">Maria Carlin Bepsi Costa SST</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.8000000</td>
+<td style="text-align: left;">Neka Putri Fardila,S.Tr.Stat.</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.6000000</td>
+<td style="text-align: right;">0.9866667</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Maria Diaz De Rozari</td>
@@ -1006,26 +949,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.9600000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Juliana Marbun A. Md</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
+<td style="text-align: left;">Maryo Yoseph Ambarto Dwi Sili Osan A.Md.Stat</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.3000000</td>
-<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
 <td style="text-align: right;">0.6000000</td>
-<td style="text-align: right;">1.1600000</td>
+<td style="text-align: right;">0.9200000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Sekolastika Maria Filipensa Naru SE</td>
+<td style="text-align: left;">Cornelia Christina Temu A.Md.Stat.</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.2333333</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.4666667</td>
+<td style="text-align: right;">0.8533333</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yohanes Lada Regaletha</td>
 <td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.3000000</td>
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.6</td>
 <td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.6400000</td>
+<td style="text-align: right;">0.8400000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maria Carlin Bepsi Costa SST</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.8000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Felia Tifani Cornelia Klau A.Md.Stat.</td>
@@ -1039,7 +1004,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.8000000</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Imelda Sandrawati Ambot S.Si</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.8000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maria Megachita Da Silva A.Md.Stat</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.7600000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Choirunnisa Jati Safitri,S.Tr.Stat</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.7600000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valentinus Nong Sina Gharu</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.3333333</td>
+<td style="text-align: right;">0.6666667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sekolastika Maria Filipensa Naru SE</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.6400000</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Averinus Emanuel S.Kom</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kasianus Vinsensius Wero S.E</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Klara Yosefa Edralin Paoe S.E</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maria Helionora Yulinda Sair S.E.</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wihelmus Wedo S.Tr.Stat</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.1000000</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Yoseph Yakobus Dedo S.E</td>
 <td style="text-align: right;">0.1000000</td>
 <td style="text-align: right;">0.1000000</td>
 <td style="text-align: right;">0.1000000</td>
@@ -1059,72 +1134,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.3</td>
 <td style="text-align: right;">0.2000000</td>
 <td style="text-align: right;">0.3600000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Imelda Sandrawati Ambot S.Si</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.6</td>
-<td style="text-align: right;">0.4000000</td>
-<td style="text-align: right;">0.8000000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Kasianus Vinsensius Wero S.E</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Klara Yosefa Edralin Paoe S.E</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Maria Helionora Yulinda Sair S.E.</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Wihelmus Wedo S.Tr.Stat</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Yoseph Yakobus Dedo S.E</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.1000000</td>
-<td style="text-align: right;">0.3</td>
-<td style="text-align: right;">0.2000000</td>
-<td style="text-align: right;">0.4000000</td>
 </tr>
 </tbody>
 </table>
@@ -1340,7 +1349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(indeks_emon <span class="sc">==</span> <span class="fu">max</span>(indeks_emon)) <span class="sc">%$%</span> </span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  nama_presensi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Employee of the Month</em> untuk bulan maret tahun 2025 adalah Juliana Marbun.</p>
+<p><em>Employee of the Month</em> untuk bulan mei tahun 2025 adalah Juliana Marbun.</p>
 </section>
 </section>
 
