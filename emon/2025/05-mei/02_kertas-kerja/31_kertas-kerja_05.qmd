@@ -1,7 +1,7 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan Maret Tahun 2025"
-author: "Wihelmus Wedo dari Tim Pilar Manajemen SDM"
+subtitle: "Bulan April Tahun 2025"
+author: "Wihelmus Wedo dari April Pilar Manajemen SDM"
 format: 
   html: default
   pdf:
@@ -38,7 +38,7 @@ tahun <- "2025"
 
 ```{r input-data}
 
-data_presensi <- here("data/Rekap Presensi Satker 1744167175654.xlsx")
+data_presensi <- here("data/Rekap Presensi Satker 1748483117182.xlsx")
 data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-747).xlsx")
 
 tbl_presensi_all <- 
@@ -61,22 +61,14 @@ read_xlsx(data_response) |>
 
 ```
 
-## Filtering 
+
+
+## Filtering
 
 Ada beberapa penilaian yang tidak valid, seperti pada ID 746 dimana pegawai yang menilai dan pegawai yang dinilai adalah sama.
-
-```{r}
-tbl_response_raw |>
-  filter(id != 746)
-```
-
-
 *Come to think of it*, lebih baik ini dibuatkan 1 daftarnya tersendiri.
 
-
-## Pegawai yang tidak masuk dalam pernilaian EMON
-
-Terdapat pegawai yang tidak diikutsertakan dalam penilaian EMON.
+Selain itu, terdapat pegawai yang tidak diikutsertakan dalam penilaian EMON.
 Pegawai tersebut antara lain;
 
 1. Afriani Niana Danus (NIP 340057264), sebab sedang menjalani Tugas Belajar
@@ -92,7 +84,13 @@ tbl_presensi <-
 tbl_presensi_all |>
   filter(nip != "340057264" & nip != "340019275")
 
-tbl_response_cleaned <- tbl_response_raw
+tbl_response_exc <- 
+here("data/emon_db_pegawai.xlsx") |>
+  read_xlsx(sheet = "id_excluded")
+
+tbl_response_cleaned <- 
+  tbl_response_raw |> 
+  anti_join(tbl_response_exc, by = join_by(id))
 ```
 
 ## Tabel pembantu 
@@ -159,10 +157,14 @@ tbl_presensi |>
     aspek_administrasi = (kehadiran * 0.4 + kedisiplinan * 0.6) * 0.2 # bobot aspek 20%
     )
 
-knitr::kable(tbl_aspek_administrasi)
+tbl_aspek_administrasi |>
+  arrange(desc(aspek_administrasi)) |>
+  knitr::kable(caption = "Tabel Aspek Administrasi")
 ```
 
 ### Aspek Kinerja
+
+Mulai dari pemilihan emon bulan april, setiap pegawai dinilai menggunakan tim PMO, sehingga 1 pegawai bisa saja dinilai lebih dari 1 kali.
 
 ```{r aspek-kinerja}
 
@@ -176,6 +178,7 @@ fx  <- function(x) {
   )
   return(y)
 }
+
 tbl_aspek_kinerja <- 
 tbl_response_cleaned |>
   select(
@@ -184,7 +187,7 @@ tbl_response_cleaned |>
     produktivitas,
     pengetahuan,
     kehandalan,
-    ketepatan_waktu,
+    waktu = ketepatan_waktu,
     inisiatif,
     kerja_sama
   ) |>
@@ -193,15 +196,22 @@ tbl_response_cleaned |>
     produktivitas = produktivitas |> fx() |> multiply_by(0.1), # bobot 10%
     pengetahuan = pengetahuan |> fx() |> multiply_by(0.1), # bobot 10%
     kehandalan = kehandalan |> fx() |> multiply_by(0.1), # bobot 10%
-    ketepatan_waktu = ketepatan_waktu |> fx() |> multiply_by(0.3), # bobot 30%
+    waktu = waktu |> fx() |> multiply_by(0.3), # bobot 30%
     inisiatif = inisiatif |> fx() |> multiply_by(0.1), # bobot 10%
     kerja_sama = kerja_sama  |> fx() |> multiply_by(0.2) # bobot 20%
   ) |>
+  summarise(
+    .by = pegawai,
+    across(.cols = mutu:kerja_sama, .fns = ~ mean(.x, na.rm = TRUE)) 
+  ) |>
   mutate(
-    aspek_kinerja = (mutu + produktivitas + pengetahuan + kehandalan + ketepatan_waktu + inisiatif + kerja_sama) * 0.4 # bobot 40%
+    aspek_kinerja = (mutu + produktivitas + pengetahuan + kehandalan + waktu + inisiatif + kerja_sama) * 0.4 # bobot 40%
   )
 
-knitr::kable(tbl_aspek_kinerja)
+
+tbl_aspek_kinerja |>
+  arrange(desc(aspek_kinerja)) |>
+  knitr::kable(caption = "Tabel Aspek Kinerja")
 ```
 
 ### Aspek *Core Value* BerAKHLAK
@@ -232,11 +242,17 @@ tbl_response_cleaned |>
     adaptif = adaptif |> fx() |> multiply_by(0.3), # bobot 30% 
     kolaboratif = kolaboratif  |> fx() |> multiply_by(0.2) # bobot 20% 
   ) |>
+  summarise(
+    .by = pegawai,
+    across(.fns = ~ mean(.x, na.rm = TRUE)) 
+  ) |>
   mutate(
     aspek_berakhlak = (berorientasi_pelayanan + akuntabel + kompeten + harmonis + loyal + adaptif + kolaboratif) * 0.4 # bobot aspek 40%
   )
 
-knitr::kable(tbl_aspek_berakhlak)
+tbl_aspek_berakhlak |>
+  arrange(desc(aspek_berakhlak)) |>
+knitr::kable(caption = "Tabel Aspek BerAKHLAK")
 ```
 
 ### Indeks EMON 
@@ -258,6 +274,7 @@ tbl_aspek_joined |>
   select(nama_presensi, contains("aspek"), indeks_emon) |>
   arrange(desc(indeks_emon))
 
+
 knitr::kable(tbl_emon)
 ```
 
@@ -268,20 +285,15 @@ Interpretasi nilai emon adalah sebagai berikut :
 2. Nilai 1 - 2.99 : secara rata-rata ada diantara Baik dan sangat baik
 3. Nilai 3 : nilai sempurna a.k.a sangat baik
 
-Terdapat beberapa nama yang memiliki nilai emon tertinggi.
-Oleh karena itu, perlu dilakukan *tie-breaker*.
-
-## Tie-Breaker 
-
 ```{r keputusan}
-emon_winner <- "Imelda Sandrawati Ambot"
+
+# tbl_emon %$% nama_presensi[indeks_emon == max(indeks_emon)]
+
+emon_winner <- 
+tbl_emon |> 
+  filter(indeks_emon == max(indeks_emon)) %$% 
+  nama_presensi
+
 ```
 
-Setelah memberitahu kepada Kepala BPS Kabupaten Sikka, diputuskan bahwa *Employee of the Month* untuk bulan `r bulan` tahun `r tahun` adalah `r emon_winner`. Beliau di pilih karena
-
-1. Mewakili BPS Kabupaten Sikka mendapatkan penghargaan dari KPPN Ende
-2. Mewakili BPS Kabupaten Sikka dalam rapat Satu Data Sikka di Bapperida.
-
-
-
-
+*Employee of the Month* untuk bulan `r bulan` tahun `r tahun` adalah `r emon_winner`.
