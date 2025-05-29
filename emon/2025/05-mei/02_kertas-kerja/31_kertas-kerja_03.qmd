@@ -39,7 +39,7 @@ tahun <- "2025"
 ```{r input-data}
 
 data_presensi <- here("data/Rekap Presensi Satker 1744167175654.xlsx")
-data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-665).xlsx")
+data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-747).xlsx")
 
 tbl_presensi_all <- 
 read_xlsx(data_presensi, skip = 6) |>
@@ -49,23 +49,30 @@ tbl_response_raw <-
 read_xlsx(data_response) |> 
   janitor::clean_names() |>
   # tanggal surat pemilihan emon maret diterbit
-  filter(waktu_mulai >= "2025-04-08") |> 
+  filter(waktu_mulai >= "2025-05-26") |> 
   #rename karena namanya panjang
   rename(
+    ketua_pmo = pegawai_yang_menilai, 
     pegawai = pegawai_yang_dinilai_masing_masing_ketua_tim_menilai_anggotanya,
     mutu = mutu_hasil_kerja,
     pengetahuan = pengetahuan_tentang_tugas_dan_tanggung_jawab,
     produktivitas = produktivitas_jam_kerja
-  ) 
+  )
 
-# Periksa jika terdapat double entry
-tbl_response_raw |> 
-  count(pegawai) |>
-  arrange(desc(n)) |>
-  knitr::kable()
 ```
 
-Bulan ini sepertinya tidak ada penilaian ganda, sehingga kita bisa lanjut
+## Filtering 
+
+Ada beberapa penilaian yang tidak valid, seperti pada ID 746 dimana pegawai yang menilai dan pegawai yang dinilai adalah sama.
+
+```{r}
+tbl_response_raw |>
+  filter(id != 746)
+```
+
+
+*Come to think of it*, lebih baik ini dibuatkan 1 daftarnya tersendiri.
+
 
 ## Pegawai yang tidak masuk dalam pernilaian EMON
 
