@@ -1,0 +1,80 @@
+---
+title: "Kertas Kerja EMON"
+subtitle: "Bulan Maret Tahun 2025"
+author: "Wihelmus Wedo dari Tim Pilar Manajemen SDM"
+format: html
+---
+
+
+```{r}
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+
+library(tidyverse)
+library(readxl)
+library(here)
+library(magrittr)
+
+bulan <- "mei"
+tahun <- "2025"
+```
+
+
+
+```{r}
+data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-742).xlsx")
+
+tbl_response_raw <-
+read_xlsx(data_response) |> 
+  janitor::clean_names() |>
+  # tanggal surat pemilihan emon maret diterbit
+  filter(waktu_mulai >= "2025-05-26") |> 
+  #rename karena namanya panjang
+  rename(
+    ketua_pmo = pegawai_yang_menilai, 
+    pegawai = pegawai_yang_dinilai_masing_masing_ketua_tim_menilai_anggotanya,
+    mutu = mutu_hasil_kerja,
+    pengetahuan = pengetahuan_tentang_tugas_dan_tanggung_jawab,
+    produktivitas = produktivitas_jam_kerja
+  ) 
+
+# Periksa jika terdapat double entry
+
+
+tbl_response_raw |>
+  view()
+
+
+
+
+
+```
+
+
+
+```{r}
+pmo_full <- read_xlsx("data/pasangan_pmo.xlsx")
+
+
+pmo_sudah <- 
+tbl_response_raw |> 
+  count(ketua_pmo, pegawai)
+
+
+pmo_belum <- 
+pmo_full |> 
+  anti_join(pmo_sudah, join_by(ketua_pmo, pegawai))
+
+
+pmo_sudah |>
+  knitr::kable()
+
+pmo_belum |>
+  knitr::kable()
+
+pmo_full
+```
+
+
+
