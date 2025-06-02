@@ -1,18 +1,18 @@
 ---
 params: 
-  nomor.sk: 79
-  bulan: april
+  nomor.sk: 109
+  bulan: Mei
   tahun: 2025
-  emon: Rex Evan
-  tanggal: 25 Maret 2025
+  emon: Juliana Marbun, A.Md
+  tanggal: 02 Juni 2025
 format: 
   pdf:
     documentclass: report
     geometry: 
-      - top=3cm
-      - left=3cm
-      - bottom=3cm
-      - right=3cm
+      - top=2.5cm
+      - left=2.5cm
+      - bottom=2.5cm
+      - right=2.5cm
 ---
 ```{r setting, message=FALSE, warning=FALSE, echo=FALSE}
 
@@ -68,12 +68,12 @@ KEPALA BADAN PUSAT STATISTIK KABUPATEN SIKKA,
 \end{center}
 
 
-\begin{tabular}{llp{11cm}}
+\begin{tabular}{llp{12cm}}
 
-	Menimbang: & a. & bahwa Badan Pusat Statistik Kabupaten Sikka telah melakukan proses pemilihan \textit{employee of the month} dan telah terpilih \textit{employee of the month} bulan `r params$bulan` tahun `r params$tahun`;
+	Menimbang: & a. & bahwa Badan Pusat Statistik Kabupaten Sikka telah melakukan proses pemilihan \textit{employee of the month} dan telah terpilih \textit{employee of the month} bulan `r params$bulan |> str_to_lower()` tahun `r params$tahun`;
 	\\
 	\\
-	& b. & bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a, perlu menetapkan Keputusan Kepala Badan Pusat Statistik Kabupaten Sikka tentang \textit{employee of the month} bulan `r params$bulan` tahun `r params$tahun` di Badan Pusat Statistik Kabupaten Sikka;
+	& b. & bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a, perlu menetapkan Keputusan Kepala Badan Pusat Statistik Kabupaten Sikka tentang \textit{employee of the month} bulan `r params$bulan |> str_to_lower()` tahun `r params$tahun` di Badan Pusat Statistik Kabupaten Sikka;
 	\bigskip\\
 	\\
 	Mengingat: & 1. & Undang-Undang Nomor 16 Tahun 1997 tentang Statistik (Lembaran Negara Republik Indonesia Tahu 1997 Nomor 39, Tambahan Lembaran Negara Republik Indonesia Nomor 3683);
@@ -97,7 +97,7 @@ KEPALA BADAN PUSAT STATISTIK KABUPATEN SIKKA,
 MEMUTUSKAN:
 \end{center}
 
-\begin{tabular}{llp{11cm}}
+\begin{tabular}{llp{12cm}}
 Menetapkan & : & KEPUTUSAN KEPALA BADAN PUSAT STATISTIK KABUPATEN SIKKA TENTANG PENETAPAN \textit{EMPLOYEE OF THE MONTH} BULAN `r str_to_upper(params$bulan)` TAHUN `r params$tahun` DI BADAN PUSAT STATISTIK KABUPATEN SIKKA
 	\\
 	\\
