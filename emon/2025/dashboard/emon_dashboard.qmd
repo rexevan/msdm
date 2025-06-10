@@ -1,0 +1,85 @@
+---
+title: "Dashboard Employee Of The Month"
+editor: source
+format: 
+  dashboard:
+    orientation: columns
+    nav-buttons: 
+      - reddit
+      - icon: gitlab
+        href: https://gitlab.com/
+---
+
+```{r}
+
+library(stringr)
+library(dplyr)
+load(file = stringr::str_c(Sys.Date(), ".RData"))
+
+```
+
+
+# Monitoring
+
+## Sesuai {height=70%}
+
+
+```{r sesuai} 
+
+penilaian_sesuai |> 
+  select(timestamp, ketua_pmo, pegawai) |>
+  knitr::kable(caption = "Penilaian yang SESUAI dengan surat")
+
+```
+
+
+## Keliru {height=30%}
+
+```{r keliru}
+
+penilaian_keliru |> 
+  select(timestamp, ketua_pmo, pegawai) |>
+  knitr::kable(caption = "Penilaian yang Keliru atau Invalid")
+
+```
+
+
+```{r belum}
+
+penilaian_belum |> 
+  select(ketua_pmo, pegawai) |>
+  knitr::kable(caption = "Penilaian yang BELUM dilakukan")
+
+```
+
+
+```{r ganda}
+
+penilaian_ganda |> 
+  select(ketua_pmo, pegawai) |>
+  knitr::kable(caption = "Penilaian yang GANDA")
+  
+
+```
+
+
+# Konten 
+
+```{r konten}
+
+penilaian_sesuai |>
+  select(-email, -catatan, -version, -keypair) |>
+  knitr::kable()
+
+```
+
+# Indeks EMON 
+
+```{r emon}
+
+indeks_emon_2 |>
+  arrange(desc(indeks_emon)) |>
+  knitr::kable()
+
+```
+
