@@ -1,0 +1,302 @@
+---
+title: "Kertas Kerja EMON"
+subtitle: "Bulan Mei Tahun 2025"
+author: "Wihelmus Wedo dari Pilar Manajemen SDM"
+format: 
+  html: default
+  pdf:
+    documentclass: report
+    classoption: [landscape]
+    geometry: 
+      - top=5mm
+      - left=5mm
+      - bottom=5mm
+      - right=5mm
+params:
+  bulan: "mei"
+  tahun: "2025"
+---
+
+## Pendahuluan
+
+Selamat datang di Kertas Kerja EMON bulan `r params$bulan` tahun `r params$tahun``.
+Bulan ini terdapat beberapa pengembangan script dari bulan lalu.
+
+```{r setting, message=FALSE, warning=FALSE}
+
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+
+library(tidyverse)
+library(readxl)
+library(here)
+library(magrittr)
+```
+
+## Input Data
+
+```{r input-data}
+
+data_presensi <- here("data/Rekap Presensi Satker 1748483117182.xlsx")
+data_response <- here("data/Form Penilaian Employee Of The Month BPS Kabupaten Sikka(1-747).xlsx")
+
+tbl_presensi_all <- 
+read_xlsx(data_presensi, skip = 6) |>
+  janitor::clean_names()
+
+tbl_response_raw <-
+read_xlsx(data_response) |> 
+  janitor::clean_names() |>
+  # tanggal surat pemilihan emon maret diterbit
+  filter(waktu_mulai >= "2025-05-26") |> 
+  #rename karena namanya panjang
+  rename(
+    ketua_pmo = pegawai_yang_menilai, 
+    pegawai = pegawai_yang_dinilai_masing_masing_ketua_tim_menilai_anggotanya,
+    mutu = mutu_hasil_kerja,
+    pengetahuan = pengetahuan_tentang_tugas_dan_tanggung_jawab,
+    produktivitas = produktivitas_jam_kerja
+  )
+
+```
+
+
+
+## Filtering
+
+Ada beberapa penilaian yang tidak valid, seperti pada ID 746 dimana pegawai yang menilai dan pegawai yang dinilai adalah sama.
+*Come to think of it*, lebih baik ini dibuatkan 1 daftarnya tersendiri.
+
+Selain itu, terdapat pegawai yang tidak diikutsertakan dalam penilaian EMON.
+Pegawai tersebut antara lain;
+
+1. Afriani Niana Danus (NIP 340057264), sebab sedang menjalani Tugas Belajar
+
+2. Kristanto Setyo Utomo (NIP 340019275), sebab jabatannya sebagai Kepala BPS Kabupaten Sikka.
+
+Sehingga kita perlu membuang baris tersebut di dalam tabel presensi.
+Tabel response memang tidak mengikutsertakan Afriani Niana Danus maupun Kristanto Setyo Utomo, sehingga kita tidak perlu melakukan *filtering*.
+
+```{r drop-pegawai-yg-tidak-diikutsertakan}
+
+tbl_presensi <- 
+tbl_presensi_all |>
+  filter(nip != "340057264" & nip != "340019275")
+
+tbl_response_exc <- 
+here("data/emon_db_pegawai.xlsx") |>
+  read_xlsx(sheet = "id_excluded")
+
+tbl_response_cleaned <- 
+  tbl_response_raw |> 
+  anti_join(tbl_response_exc, by = join_by(id))
+```
+
+## Tabel pembantu 
+
+Tabel ini dipakai sebab variabel nama pegawai dari file presensi dan file response tidaklah sama. 
+file presensi menggunakan nama yang tidak menganduk gelar, sedangkan file response menggunakan nama yang memiliki gelar
+
+```{r auxilary}
+emon_db_pegawai <- here("data/emon_db_pegawai.xlsx") |> read_xlsx()
+```
+
+
+## Hitung poin Presensi
+
+Setelah, data presensi dan data response telah *bersih*, kita bisa lanjut untuk menghitung indeks emon.
+Kita mulai dengan menghitung poin presensi.
+
+Kali ini kita akan lebih rigid dan mengikuti langkah-langkah dari KAK.
+Berdasarkan KAK Pemilihan EMON, nilai indeks emon dihitung menggunakan 3 kriteria besar. 
+
+1. Administrasi (bobot 20%)
+2. Kinerja (bobot 40%)
+3. Core Value ASN Berakhlak (bobot 40%)
+
+### Penilaian Administrasi
+Administrasi terdiri dari 2 sub bagian penilaian yakni 
+
+1. Kedisiplinan, diukur dengan jumlahnya pelanggaran ringan, pelanggaran sedang, dan pelanggaran berat pada bulan maret.
+2. kehadiran, diukur menggunakan kehadiran, keterlambatan (TL dan PSW) selama sebulan.
+
+Kehadiran memiliki bobot sebesar 0,4 dan kedisiplinan bobotnya adalah 0,6.
+
+Dalam aspek kedisiplinan, tidak ada surat pelanggaran yang dikeluarkan tim subbagian umum untuk bulan maret, sehingga semua pegawai mendapatkan poin penuh (a.k.a 3)
+
+
+```{r aspek-administrasi}
+
+tbl_aspek_administrasi <- 
+tbl_presensi |>
+  select(nip, nama_presensi = nama, hk, psw, ht) |>
+  # setting supaya hk, psw, dan ht bisa dilakukan operasi matematika
+  mutate(
+    hk = as.integer(hk),
+    psw = as.integer(psw),
+    ht = as.integer(ht)
+  ) |>
+  # hitung persentasi kehadiran.
+  # ht = jumlah hari terlambat (TL)
+  # psw = jumlah hari pulang sebelum waktu (PSW)
+  # hk = jumlah hari kerja
+  mutate(persen = 100 - ((ht + psw) / hk * 100)) |>
+  # kehadiran < 95% dapat nilai 0
+  # 95.0 < kehadiran < 99.99 dapat nilai 1
+  # sisanya a.k.a kehadiran 100% dapat nilai 3
+  mutate(
+    kehadiran = case_when(
+      persen <= 94.99 ~ 0, 
+      persen |> between(95.00, 99.99) ~ 1, 
+      .default = 3    
+      ),
+    kedisiplinan = 3 # semua pegawai tidak mendapatkan teguran ringan, sedang, maupun berat.
+    ) |>
+  mutate(
+    aspek_administrasi = (kehadiran * 0.4 + kedisiplinan * 0.6) * 0.2 # bobot aspek 20%
+    )
+
+tbl_aspek_administrasi |>
+  arrange(desc(aspek_administrasi)) |>
+  knitr::kable(caption = "Tabel Aspek Administrasi")
+```
+
+### Aspek Kinerja
+
+```{r aspek-kinerja}
+
+fx  <- function(x) {
+  y <- 
+  case_when(
+    x == "Sangat Baik" ~ 3,
+    x == "Baik" ~ 1,
+    x == "Kurang Baik" ~ 0,
+    .default = NA
+  )
+  return(y)
+}
+
+hitung <- function(x, bobot) {
+  y <- fx(x) * bobot
+  return(y)
+}
+
+tbl_aspek_kinerja <- 
+tbl_response_cleaned |>
+  select(
+    pegawai, 
+    mutu,
+    produktivitas,
+    pengetahuan,
+    kehandalan,
+    waktu = ketepatan_waktu,
+    inisiatif,
+    kerja_sama
+  ) |>
+  mutate(
+    mutu = mutu |> hitung(10/100), # bobot 10%
+    produktivitas = produktivitas |> hitung(10/100), # bobot 10%
+    pengetahuan = pengetahuan |> hitung(10/100), # bobot 10%
+    kehandalan = kehandalan |> hitung(10/100), # bobot 10%
+    waktu = waktu |> hitung(30/100), # bobot 30%
+    inisiatif = inisiatif |> hitung(10/100), # bobot 10%
+    kerja_sama = kerja_sama  |> hitung(20/100) # bobot 20%
+  ) |>
+  summarise(
+    .by = pegawai,
+    across(.cols = mutu:kerja_sama, .fns = ~ mean(.x, na.rm = TRUE)) 
+  ) |>
+  mutate(
+    aspek_kinerja = (mutu + produktivitas + pengetahuan + kehandalan + waktu + inisiatif + kerja_sama) * 0.4 # bobot 40%
+  )
+
+
+tbl_aspek_kinerja |>
+  arrange(desc(aspek_kinerja)) |>
+  knitr::kable(caption = "Tabel Aspek Kinerja")
+```
+
+### Aspek *Core Value* BerAKHLAK
+
+Penilaian  Nilai  BerAKHLAK  adalah penilaian  yang diambil  dari  nilai-nilai  core value ASN. Bobot  untuk aspek ini adalah 40 persen.
+Untuk rincian bobot pembentuk aspek ini bisa dilihat di KAK.
+
+```{r aspek-berakhlak}
+
+tbl_aspek_berakhlak <- 
+tbl_response_cleaned |>
+  select(
+    pegawai,
+    Ber = berorientasi_pelayanan,
+    A1 = akuntabel,
+    K1 = kompeten,
+    H = harmonis,
+    L = loyal,
+    A2 = adaptif,
+    K2 = kolaboratif
+  ) |>
+  mutate(
+    Ber = Ber |> hitung(10/100), # bobot 10% 
+    A1 = A1 |> hitung(10/100), # bobot 10% 
+    K1 = K1 |> hitung(10/100), # bobot 10% 
+    H = H |> hitung(10/100), # bobot 10% 
+    L = L |> hitung(10/100), # bobot 10% 
+    A2 = A2 |> hitung(30/100), # bobot 30% 
+    K2 = K2  |> hitung(20/100) # bobot 20% 
+  ) |>
+  summarise(
+    .by = pegawai,
+    across(.fns = ~ mean(.x, na.rm = TRUE)) 
+  ) |>
+  mutate(
+    aspek_berakhlak = (Ber + A1 + K1 + H + L + A2 + K2) * 0.4 # bobot aspek 40%
+  )
+
+tbl_aspek_berakhlak |>
+  arrange(desc(aspek_berakhlak)) |>
+knitr::kable(caption = "Tabel Aspek BerAKHLAK")
+```
+
+### Indeks EMON 
+
+Setelah menghitung nilai masing-masing aspek, kita bisa menghitung nilai Indeks EMON. 
+Untuk itu, kita perlu melakukan *join*.
+
+```{r joined}
+
+tbl_aspek_joined <- 
+tbl_aspek_kinerja |> 
+  full_join(tbl_aspek_berakhlak, by = join_by(pegawai)) |>
+  left_join(emon_db_pegawai, by = join_by(pegawai == nama_response)) |>
+  full_join(tbl_aspek_administrasi, by = join_by(nip, nama_presensi))
+
+tbl_emon <- 
+tbl_aspek_joined |>
+  mutate(indeks_emon = aspek_administrasi + aspek_kinerja + aspek_berakhlak) |>
+  select(nama_presensi, contains("aspek"), indeks_emon) |>
+  arrange(desc(indeks_emon))
+
+
+knitr::kable(tbl_emon)
+```
+
+Semua pegawai telah dihitung nilai indeks EMON-nya dan diurutkan.
+Interpretasi nilai emon adalah sebagai berikut :
+
+1. Nilai 0 - 0.99 : secara rata-rata ada di antara kurang baik dan baik
+2. Nilai 1 - 2.99 : secara rata-rata ada diantara Baik dan sangat baik
+3. Nilai 3 : nilai sempurna a.k.a sangat baik
+
+```{r keputusan}
+
+# tbl_emon %$% nama_presensi[indeks_emon == max(indeks_emon)]
+
+emon_winner <- 
+tbl_emon |> 
+  filter(indeks_emon == max(indeks_emon)) %$% 
+  nama_presensi
+
+```
+
+*Employee of the Month* untuk bulan `r params$bulan` tahun `r params$tahun` adalah `r emon_winner`.

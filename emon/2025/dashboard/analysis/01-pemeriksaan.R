@@ -30,7 +30,7 @@ penilaian_sesuai <-
 penilaian_keliru <- 
   anti_join(
     x = tbl_response,
-    y = tbl_sesuai,
+    y = penilaian_sesuai,
     by = join_by(ketua_pmo, pegawai)
   )
 
@@ -38,7 +38,7 @@ penilaian_keliru <-
 penilaian_belum <- 
   anti_join(
     x = tbl_surat,
-    y = tbl_sesuai,
+    y = penilaian_sesuai,
     by = join_by(ketua_pmo, pegawai)
   )
 
