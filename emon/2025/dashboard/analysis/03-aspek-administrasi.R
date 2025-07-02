@@ -2,7 +2,7 @@ library(tidyverse)
 library(readxl)
 library(magrittr)
 
-file_presensi <- "Rekap Presensi Satker 1748483117182.xlsx"
+file_presensi <- "Rekap Presensi Satker 1751424662658.xlsx"
 
 presensi <-
   file_presensi |>
