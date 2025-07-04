@@ -76,7 +76,7 @@ penilaian_belum <-
 ## Penghitungan indeks EMON -----------------------------------
 
 tbl_aspek_administrasi <- read_rds(str_c(Sys.Date(), "_aspek_administrasi.rds"))
-
+tbl_aspek_tambahan <- read_rds(str_c(Sys.Date(), "_aspek_tambahan.rds"))
 
 indeks_emon_2 <- 
 penilaian_sesuai |>
@@ -105,12 +105,13 @@ penilaian_sesuai |>
   ) |>
   rowwise() |>
   mutate(
-    aspek_kinerja = sum(c_across(mutu:kerjasama), na.rm = TRUE) * (40/100),
-    aspek_berAKHLAK = sum(c_across(ber_pelayanan:kolaboratif), na.rm = TRUE) * (40/100)
+    aspek_kinerja = sum(c_across(mutu:kerjasama), na.rm = TRUE) * (30/100),
+    aspek_berAKHLAK = sum(c_across(ber_pelayanan:kolaboratif), na.rm = TRUE) * (30/100)
   ) |>
   ungroup() |>
   left_join(tbl_aspek_administrasi, by = join_by(pegawai)) |>
-  mutate(indeks_emon = aspek_administrasi + aspek_kinerja + aspek_berAKHLAK) |>
+  left_join(tbl_aspek_tambahan, by = join_by(pegawai)) |>
+  mutate(indeks_emon = aspek_administrasi + aspek_kinerja + aspek_tugas_tambahan + aspek_berAKHLAK) |>
   select(pegawai, starts_with("aspek_"), indeks_emon)
 
 

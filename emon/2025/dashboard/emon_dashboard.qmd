@@ -63,12 +63,31 @@ penilaian_ganda |>
 ```
 
 
-# Konten 
+# Aspek Kinerja dan Aspek BerAKHLAK
 
 ```{r konten}
 
 penilaian_sesuai |>
   select(-email, -catatan, -version, -keypair) |>
+  knitr::kable()
+
+```
+
+
+# Aspek Tugas Tambahan
+
+```{r tt}
+tbl_aspek_tambahan |>
+  arrange(desc(aspek_tugas_tambahan)) |>
+  knitr::kable()
+
+```
+
+# Aspek Administrasi
+
+```{r administrasi}
+tbl_aspek_administrasi |>
+  arrange(desc(aspek_administrasi)) |>
   knitr::kable()
 
 ```
