@@ -28,10 +28,16 @@ hitung_aspek_kehadiran_mei <- function(data_presensi) {
           pct_hadir |> between(95.00, 99.99) ~ 5,
           pct_hadir |> between(90.00, 94.99) ~ 4,
           pct_hadir |> between(85.00, 89.99) ~ 3,
-          pct_hadir |> between(80.00, 85.99) ~ 2,
-          pct_hadir < 60.00 ~ 1,
+          pct_hadir |> between(80.00, 84.99) ~ 2,
+          pct_hadir < 80.00 ~ 1,
+          .default = NA
         ),
-      kedisiplinan = if_else(teguran > 0, 0, 6)
+      kedisiplinan = case_when(
+        teguran == 0 ~ 6,
+        teguran == 1 ~ 1,
+        teguran > 1 ~ 0,
+        .default = NA
+      )
     ) |>
     mutate(
       aspek_administrasi = (kehadiran * 0.6 + kedisiplinan * 0.4) * 0.2 #bobot 20%
