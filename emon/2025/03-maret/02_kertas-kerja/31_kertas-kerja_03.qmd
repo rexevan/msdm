@@ -3,7 +3,6 @@ title: "Kertas Kerja EMON"
 subtitle: "Bulan Maret Tahun 2025"
 author: "Wihelmus Wedo dari Tim Pilar Manajemen SDM"
 format: 
-  html: default
   pdf:
     documentclass: report
     classoption: [landscape]
@@ -12,6 +11,8 @@ format:
       - left=5mm
       - bottom=5mm
       - right=5mm
+params:
+  tanggal: 4 April 2025
 ---
 
 ## Pendahuluan
@@ -276,5 +277,25 @@ Setelah memberitahu kepada Kepala BPS Kabupaten Sikka, diputuskan bahwa *Employe
 2. Mewakili BPS Kabupaten Sikka dalam rapat Satu Data Sikka di Bapperida.
 
 
+## Pengesahan 
 
+Script dan Sintaks yang dimuat dalam kertas kerja ini telah mengikuti arahan dan langkah-langkah dari KAK.
+
+\bigskip
+\hfill
+\begin{tabular}{@{}c}
+
+Ditetapkan di Maumere \\
+pada tanggal `r params$tanggal` \bigskip\\
+
+
+KEPALA \\
+BADAN PUSAT STATISTIK \\
+KABUPETAN SIKKA \bigskip\\
+\\
+\\
+\\
+\\
+KRISTANTO SETYO UTOMO
+\end{tabular}
 

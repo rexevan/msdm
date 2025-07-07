@@ -1,10 +1,10 @@
 ---
 params: 
-  nomor.sk: 109
-  bulan: Mei
+  nomor.sk: 120
+  tanggal: 07 Juli 2025
+  emon: Cornelia Christina Temu, A.Md.Stat.
+  bulan: Juni
   tahun: 2025
-  emon: Juliana Marbun, A.Md
-  tanggal: 02 Juni 2025
 format: 
   pdf:
     documentclass: report
@@ -118,7 +118,7 @@ pada tanggal `r params$tanggal` \bigskip\\
 
 KUASA PENGGUNA ANGGARAN \\
 BADAN PUSAT STATISTIK \\
-KABUPATAN SIKKA \bigskip\\
+KABUPATEN SIKKA \bigskip\\
 \\
 \\
 \\

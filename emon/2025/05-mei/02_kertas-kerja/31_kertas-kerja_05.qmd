@@ -3,7 +3,6 @@ title: "Kertas Kerja EMON"
 subtitle: "Bulan Mei Tahun 2025"
 author: "Wihelmus Wedo dari Pilar Manajemen SDM"
 format: 
-  html: default
   pdf:
     documentclass: report
     classoption: [landscape]
@@ -15,6 +14,7 @@ format:
 params:
   bulan: "mei"
   tahun: "2025"
+  tanggal: 2 Juni 2025
 ---
 
 ## Pendahuluan
@@ -300,3 +300,26 @@ tbl_emon |>
 ```
 
 *Employee of the Month* untuk bulan `r params$bulan` tahun `r params$tahun` adalah `r emon_winner`.
+
+
+## Pengesahan 
+
+Script dan Sintaks yang dimuat dalam kertas kerja ini telah mengikuti arahan dan langkah-langkah dari KAK.
+
+\bigskip
+\hfill
+\begin{tabular}{@{}c}
+
+Ditetapkan di Maumere \\
+pada tanggal `r params$tanggal` \bigskip\\
+
+
+KEPALA \\
+BADAN PUSAT STATISTIK \\
+KABUPETAN SIKKA \bigskip\\
+\\
+\\
+\\
+\\
+KRISTANTO SETYO UTOMO
+\end{tabular}
