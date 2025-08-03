@@ -2,12 +2,12 @@ library(tidyverse)
 library(readxl)
 
 
-tt_tbl <- read_xlsx("analysis/penilaian emon Juni.xlsx", skip = 1) |> janitor::clean_names()
+tt_tbl <- read_xlsx("analysis/penilaian emon - kegiatan tambahan.xlsx", skip = 1, sheet = "juli") |> janitor::clean_names()
 
 tt_tbl_hitung <- 
 tt_tbl |> 
   mutate(
-  test = str_split(tugas_tambahan, pattern = ";"), 
+  test = str_split(tugas_tambahan, pattern = ","), 
   test2 = map_int(test, \(x) length(x)),
   tt_jml = if_else(tugas_tambahan |> is.na(), 0, test2)
 ) |>

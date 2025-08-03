@@ -1,6 +1,6 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan Juni Tahun 2025"
+subtitle: "Bulan Juli Tahun 2025"
 author: "Wihelmus Wedo dari Pilar Manajemen SDM"
 format: 
   pdf:
@@ -12,9 +12,9 @@ format:
       - bottom=5mm
       - right=5mm
 params:
-  bulan: "juni"
+  bulan: "juli"
   tahun: "2025"
-  tanggal: 4 Juli 2025
+  tanggal: 1 Agustus 2025
 ---
 
 ## Pendahuluan
@@ -47,12 +47,12 @@ library(magrittr)
 library(tidyverse)
 library(readxl)
 
-tt_tbl <- read_xlsx("analysis/penilaian emon Juni.xlsx", skip = 1) |> janitor::clean_names()
+tt_tbl <- read_xlsx("analysis/penilaian emon - kegiatan tambahan.xlsx", skip = 1, sheet = "juli") |> janitor::clean_names()
 
 tt_tbl_hitung <- 
 tt_tbl |> 
   mutate(
-  test = str_split(tugas_tambahan, pattern = ";"), 
+  test = str_split(tugas_tambahan, pattern = ","), 
   test2 = map_int(test, \(x) length(x)),
   tt_jml = if_else(tugas_tambahan |> is.na(), 0, test2)
 ) |>
@@ -80,7 +80,7 @@ library(tidyverse)
 library(readxl)
 library(magrittr)
 
-file_presensi <- "analysis/Rekap Presensi Satker 1751424662658.xlsx"
+file_presensi <- "analysis/Rekap Presensi Satker 1754220386381.xlsx"
 
 presensi <-
   file_presensi |>
@@ -151,8 +151,8 @@ gs4_auth(email = my_email)
 
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
-penilaian_dimulai <- "2025-07-01 07:30:01"
-penilaian_selesai <- "2025-07-04 16:30:00"
+penilaian_dimulai <- "2025-07-30 07:30:00"
+penilaian_selesai <- "2025-08-02 00:00:00"
 
 
 ## Getting data -------------------------------
@@ -294,7 +294,7 @@ tbl_emon |>
 
 ## Pengesahan 
 
-Script dan Sintaks yang dimuat dalam kertas kerja ini telah mengikuti arahan dan langkah-langkah dari KAK.
+Script dan Sintaks yang ada di dalam kertas kerja ini telah mengikuti arahan dan langkah-langkah dari KAK.
 
 \bigskip
 \hfill
@@ -306,7 +306,7 @@ pada tanggal `r params$tanggal` \bigskip\\
 
 KEPALA \\
 BADAN PUSAT STATISTIK \\
-KABUPETAN SIKKA \bigskip\\
+KABUPATEN SIKKA \bigskip\\
 \\
 \\
 \\
