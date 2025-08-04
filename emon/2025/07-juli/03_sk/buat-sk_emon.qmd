@@ -1,9 +1,9 @@
 ---
 params: 
-  nomor.sk: 120
-  tanggal: 07 Juli 2025
-  emon: Cornelia Christina Temu, A.Md.Stat.
-  bulan: Juni
+  nomor.sk: 129
+  tanggal: 01 Agustus 2025
+  emon: Felia Tifani Cornelia Klau, S. Stat
+  bulan: Juli
   tahun: 2025
 format: 
   pdf:
