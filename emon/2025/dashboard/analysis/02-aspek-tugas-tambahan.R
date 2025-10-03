@@ -3,7 +3,7 @@ library(readxl)
 library(googlesheets4)
 
 my_email <- "rex.evan96@gmail.com"
-bulan <- "agustus"
+bulan <- "september"
 
 gs4_auth(email = my_email)
 
