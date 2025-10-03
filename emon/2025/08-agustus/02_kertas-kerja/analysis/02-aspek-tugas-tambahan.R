@@ -1,13 +1,24 @@
 library(tidyverse)
 library(readxl)
+library(googlesheets4)
 
+my_email <- "rex.evan96@gmail.com"
+bulan <- "agustus"
 
-tt_tbl <- read_xlsx("analysis/penilaian emon Juni.xlsx", skip = 1) |> janitor::clean_names()
+gs4_auth(email = my_email)
+
+ss <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
+
+tt_tbl <- read_sheet(ss, sheet = "tugas_tambahan") |>
+  select(pegawai = nama_pegawai, tugas_tambahan = all_of(bulan)) |>
+  mutate(tugas_tambahan = str_replace(tugas_tambahan, "-", NA_character_))
+
+# tt_tbl <- read_xlsx("analysis/penilaian emon - kegiatan tambahan.xlsx", skip = 1, sheet = "juli") |> janitor::clean_names()
 
 tt_tbl_hitung <- 
 tt_tbl |> 
   mutate(
-  test = str_split(tugas_tambahan, pattern = ";"), 
+  test = str_split(tugas_tambahan, pattern = ","), 
   test2 = map_int(test, \(x) length(x)),
   tt_jml = if_else(tugas_tambahan |> is.na(), 0, test2)
 ) |>

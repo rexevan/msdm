@@ -10,8 +10,8 @@ gs4_auth(email = my_email)
 
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
-penilaian_dimulai <- "2025-08-26 07:30:01"
-penilaian_selesai <- "2025-08-31 00:00:00"
+penilaian_dimulai <- "2025-09-30"
+penilaian_selesai <- "2025-10-04"
 
 
 ## Getting data -------------------------------

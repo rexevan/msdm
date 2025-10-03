@@ -1,9 +1,9 @@
 ---
 params: 
-  nomor.sk: 129
-  tanggal: 01 Agustus 2025
-  emon: Felia Tifani Cornelia Klau, S. Stat
-  bulan: Juli
+  nomor.sk: 140
+  tanggal: 01 September 2025
+  emon: Yoseph Yakobus Dedo, S.E.
+  bulan: Agustus
   tahun: 2025
 format: 
   pdf:

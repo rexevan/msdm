@@ -1,6 +1,6 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan Juli Tahun 2025"
+subtitle: "Bulan Agustus Tahun 2025"
 author: "Wihelmus Wedo dari Pilar Manajemen SDM"
 format: 
   pdf:
@@ -12,9 +12,9 @@ format:
       - bottom=5mm
       - right=5mm
 params:
-  bulan: "juli"
+  bulan: "agustus"
   tahun: "2025"
-  tanggal: 1 Agustus 2025
+  tanggal: 1 September 2025
 ---
 
 ## Pendahuluan
@@ -44,10 +44,26 @@ library(magrittr)
 ## Penghitungan Aspek Tugas Tambahan 
 
 ```{r aspek-tugas-tambahan}
-library(tidyverse)
-library(readxl)
 
-tt_tbl <- read_xlsx("analysis/penilaian emon - kegiatan tambahan.xlsx", skip = 1, sheet = "juli") |> janitor::clean_names()
+## Pendahuluan ----------------------------------
+library(tidyverse)
+library(googlesheets4)
+library(janitor)
+
+my_email <- "rex.evan96@gmail.com"
+
+gs4_auth(email = my_email)
+
+link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
+
+tt_tbl <- read_sheet(link_response, sheet = "tugas_tambahan") |>
+  select(pegawai = nama_pegawai, tugas_tambahan = params$bulan) |>
+  mutate(tugas_tambahan = str_replace(tugas_tambahan, "-", NA_character_))
+
+# library(tidyverse)
+# library(readxl)
+# 
+# tt_tbl <- read_xlsx("analysis/penilaian emon - kegiatan tambahan.xlsx", skip = 1, sheet = "juli") |> janitor::clean_names()
 
 tt_tbl_hitung <- 
 tt_tbl |> 
@@ -80,7 +96,7 @@ library(tidyverse)
 library(readxl)
 library(magrittr)
 
-file_presensi <- "analysis/Rekap Presensi Satker 1754220386381.xlsx"
+file_presensi <- "analysis/Rekap Presensi Satker 1756524561856.xlsx"
 
 presensi <-
   file_presensi |>
@@ -151,8 +167,8 @@ gs4_auth(email = my_email)
 
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
-penilaian_dimulai <- "2025-07-30 07:30:00"
-penilaian_selesai <- "2025-08-02 00:00:00"
+penilaian_dimulai <- "2025-08-26 07:30:00"
+penilaian_selesai <- "2025-08-30 00:00:00"
 
 
 ## Getting data -------------------------------
