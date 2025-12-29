@@ -1,0 +1,330 @@
+---
+title: "Kertas Kerja EMON"
+subtitle: "Bulan November Tahun 2025"
+author: "Wihelmus Wedo dari Pilar Manajemen SDM"
+format: 
+  pdf:
+    documentclass: report
+    classoption: [landscape]
+    geometry: 
+      - top=5mm
+      - left=5mm
+      - bottom=5mm
+      - right=5mm
+params:
+  bulan: "november"
+  tahun: "2025"
+  tanggal: 01 Desember 2025
+---
+
+## Pendahuluan
+
+Selamat datang di Kertas Kerja EMON bulan `r params$bulan` tahun `r params$tahun``.
+
+1. Pengisian dilakukan menggunakan *Google Form*
+1. Penilaian Aspek Kinerja dan Aspek BerAKHLAK menggunakan skala 1-6
+1. Ditambahkan Aspek Tugas Tambahan dalam penghitungan EMON
+1. Ditambahkan fitur Dashboard.
+1. Untuk lebih jelasnya, silahkan dilihat KAK Employee of the Month Revisi ke-3
+
+```{r setting, message=FALSE, warning=FALSE}
+
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+
+library(tidyverse)
+library(readxl)
+library(here)
+library(magrittr)
+```
+
+
+## Penghitungan Aspek Tugas Tambahan 
+
+```{r aspek-tugas-tambahan}
+
+## Pendahuluan ----------------------------------
+library(tidyverse)
+library(googlesheets4)
+library(janitor)
+
+my_email <- "rex.evan96@gmail.com"
+
+gs4_auth(email = my_email)
+
+link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
+
+tt_tbl <- read_sheet(link_response, sheet = "tugas_tambahan") |>
+  select(pegawai = nama_pegawai, tugas_tambahan = params$bulan) |>
+  mutate(tugas_tambahan = str_replace(tugas_tambahan, "-", NA_character_))
+
+# library(tidyverse)
+# library(readxl)
+# 
+# tt_tbl <- read_xlsx("analysis/penilaian emon - kegiatan tambahan.xlsx", skip = 1, sheet = "juli") |> janitor::clean_names()
+
+tt_tbl_hitung <- 
+tt_tbl |> 
+  mutate(
+  test = str_split(tugas_tambahan, pattern = ","), 
+  test2 = map_int(test, \(x) length(x)),
+  tt_jml = if_else(tugas_tambahan |> is.na(), 0, test2)
+) |>
+  select(pegawai, tugas_tambahan, tt_jml) |>
+  mutate(
+  tt_jml_max = max(tt_jml), # jumlah tugas tambahan terbanyak untuk dijadikan patokan
+  tt_pct = (tt_jml / tt_jml_max), # persentase terhadap tugas tambahan
+  aspek_tugas_tambahan = tt_pct * (20/100) * 6 # bobot 20% terhadap keseluruhan indeks EMON. 
+  #Karena indeks emon menggunakan skala 1 - 6, maka niali aspek ini juga paling tinggi ini adalah 6
+)
+
+saveRDS(tt_tbl_hitung, file = str_c(Sys.Date(), "_aspek_tambahan.rds"))
+
+
+tt_tbl_hitung |>
+  arrange(desc(aspek_tugas_tambahan)) |>
+  knitr::kable()
+```
+
+
+## Aspek Administrasi
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(magrittr)
+
+file_presensi <- "analysis/Rekap Presensi Satker 1764412321615.xlsx"
+
+presensi <-
+  file_presensi |>
+  read_xlsx(skip = 6) |>
+  janitor::clean_names() |>
+  select(pegawai = nama, hd, ht, psw)
+
+hitung_aspek_kehadiran_mei <- function(data_presensi) {
+  
+  y <- 
+  data_presensi |>
+    mutate(
+      hd  = as.integer(hd),
+      ht  = as.integer(ht),
+      psw = as.integer(psw),
+      pct_hadir = (1 - (ht + psw)  / hd) * 100
+    ) |>
+    mutate(teguran = 0) |>
+    mutate(
+      kehadiran = 
+        case_when(
+          pct_hadir == 100 ~ 6, 
+          pct_hadir |> between(95.00, 99.99) ~ 5,
+          pct_hadir |> between(90.00, 94.99) ~ 4,
+          pct_hadir |> between(85.00, 89.99) ~ 3,
+          pct_hadir |> between(80.00, 84.99) ~ 2,
+          pct_hadir < 80.00 ~ 1,
+          .default = NA
+        ),
+      kedisiplinan = case_when(
+        teguran == 0 ~ 6,
+        teguran == 1 ~ 1,
+        teguran > 1 ~ 0,
+        .default = NA
+      )
+    ) |>
+    mutate(
+      aspek_administrasi = (kehadiran * 0.6 + kedisiplinan * 0.4) * 0.2 #bobot 20%
+    )
+  
+  return(y)
+}
+
+
+tbl_presensi <- hitung_aspek_kehadiran_mei(presensi) 
+
+saveRDS(tbl_presensi, file = str_c(Sys.Date(), "_aspek_administrasi.rds"))
+
+tbl_presensi |>
+  arrange(desc(aspek_administrasi)) |>
+  knitr::kable()
+
+```
+
+
+## Aspek Kinerja dan Aspek BerAKHLAK
+
+```{r}
+
+## Pendahuluan ----------------------------------
+library(tidyverse)
+library(googlesheets4)
+library(janitor)
+
+my_email <- "rex.evan96@gmail.com"
+
+gs4_auth(email = my_email)
+
+link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
+
+penilaian_dimulai <- "2025-11-25"
+penilaian_selesai <- "2025-11-28 16:30:00"
+
+
+## Getting data -------------------------------
+tbl_colnames  <- read_sheet(ss = link_response, sheet = "colnames")
+tbl_exclude   <- read_sheet(ss = link_response, sheet = "exclude")
+tbl_surat     <- read_sheet(ss = link_response, sheet = "surat")
+
+tbl_response_all <- read_sheet(ss = link_response, sheet = "response") |>
+  rename_with(~ tbl_colnames$new_name, all_of(tbl_colnames$old_name))
+
+tbl_response  <-  
+  tbl_response_all |> 
+  anti_join(tbl_exclude, join_by(timestamp)) |>
+  filter(timestamp > penilaian_dimulai) |>
+  filter(timestamp <= penilaian_selesai)
+
+
+## Pemeriksaan penilaian ganda --------------------------
+
+## sesuai surat, tidak ada penilaian ganda
+
+cek_ganda <- function(data) {
+  
+  y <- 
+    data |>
+    select(ketua_pmo, pegawai) |>
+    group_by(ketua_pmo, pegawai) |>
+    count() |>
+    arrange(desc(n))  
+  
+  return(y)
+}
+
+cek_ganda(tbl_surat)
+penilaian_ganda <- cek_ganda(tbl_response) |> filter(n > 1)
+
+## Pemeriksaan kesesuaian -----------------------------
+
+penilaian_sesuai <- 
+  inner_join(
+    x = tbl_response,
+    y = tbl_surat,
+    by = join_by(ketua_pmo, pegawai)
+  )
+
+
+penilaian_keliru <- 
+  anti_join(
+    x = tbl_response,
+    y = penilaian_sesuai,
+    by = join_by(ketua_pmo, pegawai)
+  )
+
+
+penilaian_belum <- 
+  anti_join(
+    x = tbl_surat,
+    y = penilaian_sesuai,
+    by = join_by(ketua_pmo, pegawai)
+  )
+```
+
+## Penghitungan indeks EMON 
+
+```{r}
+
+
+
+tbl_aspek_administrasi <- read_rds(str_c(Sys.Date(), "_aspek_administrasi.rds"))
+tbl_aspek_tambahan <- read_rds(str_c(Sys.Date(), "_aspek_tambahan.rds"))
+
+tbl_emon <- 
+penilaian_sesuai |>
+  select(pegawai, mutu:kolaboratif) |>
+  summarise(
+    across(mutu:kolaboratif, \(x) mean(x, na.rm = TRUE)),
+    .by = pegawai
+  ) |>
+  mutate(
+    mutu          = mutu * (10/100), # bobot 10%
+    produktivitas = produktivitas * (10/100), # bobot 10%
+    pengetahuan   = pengetahuan * (10/100), # bobot 10%
+    kehandalan    = kehandalan * (10/100), # bobot 10%
+    waktu         = waktu * (30/100), # bobot 30%
+    inisiatif     = inisiatif * (10/100), # bobot 10%
+    kerjasama     = kerjasama * (20/100) # bobot 20%  
+  ) |>
+  mutate(
+    ber_pelayanan = ber_pelayanan * (10/100), # bobot 10% 
+    akuntabel     = akuntabel * (10/100), # bobot 10% 
+    kompeten      = kompeten * (10/100), # bobot 10% 
+    harmonis      = harmonis * (10/100), # bobot 10% 
+    loyal         = loyal * (10/100), # bobot 10% 
+    adaptif       = adaptif * (30/100), # bobot 30% 
+    kolaboratif   = kolaboratif * (20/100) # bobot 20% 
+  ) |>
+  rowwise() |>
+  mutate(
+    aspek_kinerja = sum(c_across(mutu:kerjasama), na.rm = TRUE) * (30/100),
+    aspek_berAKHLAK = sum(c_across(ber_pelayanan:kolaboratif), na.rm = TRUE) * (30/100)
+  ) |>
+  ungroup() |>
+  left_join(tbl_aspek_administrasi, by = join_by(pegawai)) |>
+  left_join(tbl_aspek_tambahan, by = join_by(pegawai)) |>
+  mutate(indeks_emon = aspek_administrasi + aspek_kinerja + aspek_tugas_tambahan + aspek_berAKHLAK) |>
+  select(pegawai, starts_with("aspek_"), indeks_emon)
+
+
+tbl_emon |>
+  arrange(desc(indeks_emon)) |>
+  knitr::kable()
+
+         
+```
+
+
+Semua pegawai telah dihitung nilai indeks EMON-nya dan diurutkan.
+Interpretasi nilai emon adalah sebagai berikut :
+
+1. Nilai 1 - 2.99 : secara rata-rata ada di antara kurang baik dan baik
+2. Nilai 3 - 5.99 : secara rata-rata ada diantara Baik dan sangat baik
+3. Nilai 6 : nilai sempurna a.k.a sangat baik
+
+```{r keputusan}
+
+emon_winner <-
+tbl_emon |>
+  dplyr::filter(indeks_emon == max(indeks_emon)) %$%
+  pegawai
+
+# emon_winner <- tbl_emon %$% pegawai[indeks_emon == max(indeks_emon)]
+
+
+```
+
+*Employee of the Month* untuk bulan `r params$bulan` tahun `r params$tahun` adalah `r emon_winner``.
+
+\newpage
+
+## Pengesahan 
+
+Script dan Sintaks yang ada di dalam kertas kerja ini telah mengikuti arahan dan langkah-langkah dari KAK.
+
+\bigskip
+\hfill
+\begin{tabular}{@{}c}
+
+Ditetapkan di Maumere \\
+pada tanggal `r params$tanggal` \bigskip\\
+
+
+KEPALA \\
+BADAN PUSAT STATISTIK \\
+KABUPATEN SIKKA \bigskip\\
+\\
+\\
+\\
+\\
+KRISTANTO SETYO UTOMO
+\end{tabular}

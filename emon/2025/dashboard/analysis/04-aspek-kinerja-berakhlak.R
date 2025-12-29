@@ -10,8 +10,8 @@ gs4_auth(email = my_email)
 
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
-penilaian_dimulai <- "2025-09-30"
-penilaian_selesai <- "2025-10-04"
+penilaian_dimulai <- "2025-11-25 00:00:00"
+penilaian_selesai <- "2025-11-28 16:30:00"
 
 
 ## Getting data -------------------------------
@@ -27,7 +27,7 @@ tbl_response  <-
   anti_join(tbl_exclude, join_by(timestamp)) |>
   filter(timestamp > penilaian_dimulai) |>
   filter(timestamp <= penilaian_selesai)
-
+tbl_response
 
 ## Pemeriksaan penilaian ganda --------------------------
 

@@ -1,0 +1,127 @@
+---
+params: 
+  nomor.sk: 182
+  tanggal: 05 Desember 2025
+  emon: Clementine Mursitadewi Riantoby, A.Md.Stat.
+  bulan: November
+  tahun: 2025
+format: 
+  pdf:
+    documentclass: report
+    geometry: 
+      - top=2.5cm
+      - left=2.5cm
+      - bottom=2.5cm
+      - right=2.5cm
+---
+```{r setting, message=FALSE, warning=FALSE, echo=FALSE}
+
+knitr::opts_chunk$set(
+  message = FALSE, warning = FALSE
+)
+
+library(stringr)
+
+```
+
+
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\pagenumbering{gobble}
+
+\setlength{\parindent}{0pt}   
+\setlength{\parskip}{1em}  
+
+\begin{center}
+\includegraphics[width=0.10\textwidth]{logo/bps-logo.png}
+\\
+\textit{\textbf{
+	\large{
+	BADAN PUSAT STATISTIK
+	\\
+	KABUPATEN SIKKA
+	}
+}}
+
+KEPUTUSAN KEPALA BADAN PUSAT STATISTIK
+KABUPATEN SIKKA
+\\
+\bigskip
+NOMOR `r params$nomor.sk` TAHUN `r params$tahun`
+\\
+\bigskip
+TENTANG
+\\
+\bigskip
+PENETAPAN \textit{EMPLOYEE OF THE MONTH} BULAN `r str_to_upper(params$bulan)` TAHUN `r params$tahun`
+\\
+\bigskip
+DI BADAN PUSAT STATISTIK KABUPATEN SIKKA
+\\
+\bigskip
+KEPALA BADAN PUSAT STATISTIK KABUPATEN SIKKA,
+
+\end{center}
+
+
+\begin{tabular}{llp{12cm}}
+
+	Menimbang: & a. & bahwa Badan Pusat Statistik Kabupaten Sikka telah melakukan proses pemilihan \textit{employee of the month} dan telah terpilih \textit{employee of the month} bulan `r params$bulan |> str_to_lower()` tahun `r params$tahun`;
+	\\
+	\\
+	& b. & bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a, perlu menetapkan Keputusan Kepala Badan Pusat Statistik Kabupaten Sikka tentang \textit{employee of the month} bulan `r params$bulan |> str_to_lower()` tahun `r params$tahun` di Badan Pusat Statistik Kabupaten Sikka;
+	\bigskip\\
+	\\
+	Mengingat: & 1. & Undang-Undang Nomor 16 Tahun 1997 tentang Statistik (Lembaran Negara Republik Indonesia Tahu 1997 Nomor 39, Tambahan Lembaran Negara Republik Indonesia Nomor 3683);
+	\\
+	\\
+	& 2. & Undang-Undang Nomor 20 Tahun 2023 tentang Aparatur Sipil Negara (Lembaran Negara Republik Indonesia Tahun 2023 Nomor 141, Tambaan Lembaran Negara Republik Indonesia Nomor 6897);
+	\\
+	\\
+	& 3. & Peraturan Pemerintah Nomor 11 Tahun 2017 tentang Manajemen Pegawai Negeri Sipil (Lembaran Negara Republik Indonesia Tahun 2017 Nomor 63, Tambahan Lembaran Negara Republik Indonesia Nomor 6307), sebagaimana telah diubah dengan Peraturan Pemerintah Nomor 17 Tahun 2020 (Lembaran Negara Republik Indonesia Tahun 2020 Nomor 68, Tambahan Lembaran Negara Republik Nomor 6477);
+	\\
+	\\
+	& 4. & Peraturan Presiden Nomor 86 Tahun 2007 tentang Badan Pusat Statistik
+	\\
+	\\
+	& 5. & Peraturan Badan Pusat Statistik Nomor 5 Tahun 2023 tentang Organisasi dan Tata Kerja Badan Pusat Statistik Provinsi dan Badan Pusat Statistik Kabupaten/Kota (Berita Negara Republik Indonesia Tahun 2023 Nomor 429);
+\end{tabular}
+
+\newpage
+
+\begin{center}
+MEMUTUSKAN:
+\end{center}
+
+\begin{tabular}{llp{12cm}}
+Menetapkan & : & KEPUTUSAN KEPALA BADAN PUSAT STATISTIK KABUPATEN SIKKA TENTANG PENETAPAN \textit{EMPLOYEE OF THE MONTH} BULAN `r str_to_upper(params$bulan)` TAHUN `r params$tahun` DI BADAN PUSAT STATISTIK KABUPATEN SIKKA
+	\\
+	\\
+KESATU & : &  Menetapkan \textit{Employee Of The Month} Bulan `r str_to_title(params$bulan)` Tahun `r params$tahun` adalah `r params$emon`
+	\\
+	\\
+KEDUA & : & Keputusan ini mulai berlaku sejak \textit{Employee Of The Month} terpilih dan ditetapkan pada setiap bulannya.
+\end{tabular}
+
+
+\bigskip
+\hfill
+\begin{tabular}{@{}c}
+
+Ditetapkan di Maumere \\
+pada tanggal `r params$tanggal` \bigskip\\
+
+
+KUASA PENGGUNA ANGGARAN \\
+BADAN PUSAT STATISTIK \\
+KABUPATEN SIKKA \bigskip\\
+\\
+\\
+\\
+\\
+KRISTANTO SETYO UTOMO
+\end{tabular}
