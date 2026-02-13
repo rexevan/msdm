@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 
 library(tidyverse)
 library(readxl)
-library(here)
+#library(here)
 library(magrittr)
 ```
 
@@ -95,7 +95,7 @@ library(tidyverse)
 library(readxl)
 library(magrittr)
 
-file_presensi <- "analysis/Rekap Presensi Satker 1767753483360.xlsx"
+file_presensi <- "data/Rekap Presensi Satker 1770955338627.xlsx"
 
 presensi <-
   file_presensi |>
@@ -172,8 +172,8 @@ gs4_auth(email = my_email)
 
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
-penilaian_dimulai <- "2026-02-01 00:00:00"
-penilaian_selesai <- "2026-02-13 12:00:00"
+penilaian_dimulai <- "2026-02-01 00:00:00" |> lubridate::as_datetime()
+penilaian_selesai <- "2026-02-13 13:00:00" |> lubridate::as_datetime()
 
 
 ## Getting data -------------------------------
@@ -194,7 +194,6 @@ tbl_response  <-
   anti_join(tbl_exclude, join_by(timestamp)) |>
   filter(timestamp > penilaian_dimulai) |>
   filter(timestamp <= penilaian_selesai)
-tbl_response
 
 ## Pemeriksaan penilaian ganda --------------------------
 
@@ -207,13 +206,12 @@ cek_ganda <- function(data) {
     select(ketua_pmo, pegawai) |>
     group_by(ketua_pmo, pegawai) |>
     count() |>
-    arrange(desc(n))  
+    filter(n > 1)
   
   return(y)
 }
 
 cek_ganda(tbl_surat)
-penilaian_ganda <- cek_ganda(tbl_response) |> filter(n > 1)
 
 ## Pemeriksaan kesesuaian -----------------------------
 

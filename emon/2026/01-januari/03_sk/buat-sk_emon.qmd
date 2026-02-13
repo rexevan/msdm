@@ -1,18 +1,17 @@
 ---
 params: 
-  nomor.sk: 63
-  tanggal: 8 Januari 2025
-  emon: Yohanes Lada Regaletha
-  bulan: Desember
-  tahun: 2025
+  nomor.sk: 082
+  tanggal: 13 Februari 2026
+  emon: Maryo Yoseph Ambarto Dwi Sili Osan, A.Md.Stat
+  bulan: Januari
+  tahun: 2026
 format: 
   pdf:
     documentclass: report
     geometry: 
-      - top=2.5cm
-      - left=2.5cm
-      - bottom=2.5cm
-      - right=2.5cm
+      - paperwidth=210mm
+      - paperheight=330mm
+      - margin=2cm
 ---
 ```{r setting, message=FALSE, warning=FALSE, echo=FALSE}
 
