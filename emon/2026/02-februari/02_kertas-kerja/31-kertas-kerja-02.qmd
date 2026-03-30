@@ -15,6 +15,7 @@ params:
   bulan: "februari"
   tahun: "2026"
   tanggal: 6 Maret 2026
+  surat.no: "B-028/53106/KP.390/2026"
 ---
 
 # Pendahuluan
@@ -26,6 +27,8 @@ Selamat datang di Kertas Kerja EMON bulan `r params$bulan` tahun `r params$tahun
 1. Ditambahkan Aspek Tugas Tambahan dalam penghitungan EMON
 1. Ditambahkan fitur Dashboard.
 1. Untuk lebih jelasnya, silahkan dilihat KAK Employee of the Month Revisi ke-3
+1. Waktu penilaian mengikuti surat keluar nomor `r params$surat.no`
+1. Waktu Selesai di ubah dari tangal 6 Maret 2026 Pukul 13.00 WITA menjadi tanggal 6 Maret 2026 Pukul 15.30 WITA
 
 ```{r setting, message=FALSE, warning=FALSE}
 
@@ -173,7 +176,7 @@ gs4_auth(email = my_email)
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
 penilaian_dimulai <- "2026-03-02 08:00:00" |> lubridate::as_datetime()
-penilaian_selesai <- "2026-03-06 13:00:00" |> lubridate::as_datetime()
+penilaian_selesai <- "2026-03-06 15:30:00" |> lubridate::as_datetime()
 
 
 ## Getting data -------------------------------
@@ -340,5 +343,5 @@ KABUPATEN SIKKA \bigskip\\
 \\
 \\
 \\
-KRISTANTO SETYO UTOMO
+JEMSI ARMANDO MANUFOE
 \end{tabular}
