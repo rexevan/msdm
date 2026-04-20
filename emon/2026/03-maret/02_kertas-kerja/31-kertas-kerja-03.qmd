@@ -1,6 +1,6 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan Februari Tahun 2026"
+subtitle: "Bulan Maret Tahun 2026"
 author: "Wihelmus Wedo dari Pilar Manajemen SDM"
 format: 
   pdf:
@@ -14,7 +14,7 @@ format:
 params:
   bulan: "maret"
   tahun: "2026"
-  tanggal: 6 Maret 2026
+  tanggal: 14 April 2026
   surat.no: "B-028/53106/KP.390/2026"
 ---
 
@@ -28,7 +28,6 @@ Selamat datang di Kertas Kerja EMON bulan `r params$bulan` tahun `r params$tahun
 1. Ditambahkan fitur Dashboard.
 1. Untuk lebih jelasnya, silahkan dilihat KAK Employee of the Month Revisi ke-3
 1. Waktu penilaian mengikuti surat keluar nomor `r params$surat.no`
-1. Waktu Selesai di ubah dari tangal 6 Maret 2026 Pukul 13.00 WITA menjadi tanggal 6 Maret 2026 Pukul 15.30 WITA
 
 ```{r setting, message=FALSE, warning=FALSE}
 
@@ -100,7 +99,7 @@ library(tidyverse)
 library(readxl)
 library(magrittr)
 
-file_presensi <- ""
+file_presensi <- "data/Rekap Presensi Satker 1776173377305.xlsx"
 
 presensi <-
   file_presensi |>

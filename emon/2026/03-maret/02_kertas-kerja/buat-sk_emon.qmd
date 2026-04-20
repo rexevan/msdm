@@ -1,9 +1,9 @@
 ---
 params: 
-  nomor.sk: 098
-  tanggal: 6 Maret 2026
-  emon: Yohanes Lada Regaletha
-  bulan: Februari
+  nomor.sk: 125
+  tanggal: 14 April 2026
+  emon: Wihelmus Wedo
+  bulan: Maret
   tahun: 2026
 format: 
   pdf:
