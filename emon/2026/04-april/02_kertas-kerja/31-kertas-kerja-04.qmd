@@ -1,6 +1,6 @@
 ---
 title: "Kertas Kerja EMON"
-subtitle: "Bulan Februari Tahun 2026"
+subtitle: "Bulan April Tahun 2026"
 author: "Wihelmus Wedo dari Pilar Manajemen SDM"
 format: 
   pdf:
@@ -12,10 +12,10 @@ format:
       - bottom=5mm
       - right=5mm
 params:
-  bulan: "maret"
+  bulan: "mei"
   tahun: "2026"
-  tanggal: 6 Maret 2026
-  surat.no: "B-028/53106/KP.390/2026"
+  tanggal: 16 Mei 2026
+  surat.no: "B-038/53106/KP.390/2026"
 ---
 
 # Pendahuluan
@@ -53,7 +53,7 @@ library(googlesheets4)
 
 my_email <- "rex.evan96@gmail.com"
 #bulan <- params$bulan
-bulan <- "maret"
+bulan <- "april"
 
 
 gs4_auth(email = my_email)
@@ -100,7 +100,7 @@ library(tidyverse)
 library(readxl)
 library(magrittr)
 
-file_presensi <- ""
+file_presensi <- "data/Rekap Presensi Satker 1777811127026.xlsx"
 
 presensi <-
   file_presensi |>
@@ -177,8 +177,8 @@ gs4_auth(email = my_email)
 
 link_response <- "https://docs.google.com/spreadsheets/d/1WTj1kB83yp4_jM7aTNuBV_0h4kFFiydDJzLqKq4T348/edit?usp=sharing"
 
-penilaian_dimulai <- "2026-04-01 08:00:00" |> lubridate::as_datetime()
-penilaian_selesai <- "2026-04-10 13:00:00" |> lubridate::as_datetime()
+penilaian_dimulai <- "2026-05-04 08:00:00" |> lubridate::as_datetime()
+penilaian_selesai <- "2026-05-15 23:59:00" |> lubridate::as_datetime()
 
 
 ## Getting data -------------------------------
