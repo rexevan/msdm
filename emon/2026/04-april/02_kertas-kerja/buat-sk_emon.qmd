@@ -1,9 +1,9 @@
 ---
 params: 
-  nomor.sk: 098
-  tanggal: 6 Maret 2026
-  emon: Yohanes Lada Regaletha
-  bulan: Februari
+  nomor.sk: 139
+  tanggal: 18 Mei 2026
+  emon: Alvino Alexando Yappy
+  bulan: April
   tahun: 2026
 format: 
   pdf:
@@ -90,8 +90,6 @@ KEPALA BADAN PUSAT STATISTIK KABUPATEN SIKKA,
 	& 5. & Peraturan Badan Pusat Statistik Nomor 5 Tahun 2023 tentang Organisasi dan Tata Kerja Badan Pusat Statistik Provinsi dan Badan Pusat Statistik Kabupaten/Kota (Berita Negara Republik Indonesia Tahun 2023 Nomor 429);
 \end{tabular}
 
-\newpage
-
 \begin{center}
 MEMUTUSKAN:
 \end{center}
@@ -106,6 +104,7 @@ KESATU & : &  Menetapkan \textit{Employee Of The Month} Bulan `r str_to_title(pa
 KEDUA & : & Keputusan ini mulai berlaku sejak \textit{Employee Of The Month} terpilih dan ditetapkan pada setiap bulannya.
 \end{tabular}
 
+\newpage
 
 \bigskip
 \hfill
